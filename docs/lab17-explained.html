@@ -1,0 +1,1076 @@
+<title>Bốn Lớp Ký Ức</title>
+
+<style>
+  :root {
+    --bg: #F5F7F4;
+    --surface: #FFFFFF;
+    --surface-2: #EBEEE8;
+    --ink: #1B2320;
+    --ink-2: #4E5B55;
+    --ink-3: #7B877F;
+    --rule: #D7DDD3;
+    --accent: #A82449;
+    --accent-ink: #8C1D3D;
+    --st: #2563EB;
+    --lt: #059669;
+    --ep: #C2710A;
+    --sem: #7C3AED;
+    --ok: #15803D;
+    --bad: #B91C1C;
+
+    --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --font-body: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "Cascadia Mono", Consolas, ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101413;
+      --surface: #171C1A;
+      --surface-2: #1E2522;
+      --ink: #E6EBE5;
+      --ink-2: #A6B1A9;
+      --ink-3: #7B877F;
+      --rule: #2A312D;
+      --accent: #F4738F;
+      --accent-ink: #FF93A9;
+      --st: #7CA7FF;
+      --lt: #34D399;
+      --ep: #F0A93C;
+      --sem: #B08CFF;
+      --ok: #4ADE80;
+      --bad: #F87171;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #101413;
+    --surface: #171C1A;
+    --surface-2: #1E2522;
+    --ink: #E6EBE5;
+    --ink-2: #A6B1A9;
+    --ink-3: #7B877F;
+    --rule: #2A312D;
+    --accent: #F4738F;
+    --accent-ink: #FF93A9;
+    --st: #7CA7FF;
+    --lt: #34D399;
+    --ep: #F0A93C;
+    --sem: #B08CFF;
+    --ok: #4ADE80;
+    --bad: #F87171;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface);
+  }
+  .masthead-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 48px 28px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.1rem, 4.6vw, 3.1rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .lede {
+    font-size: 1.08rem;
+    color: var(--ink-2);
+    max-width: 66ch;
+    margin: 0;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-3);
+    padding-top: 6px;
+    border-top: 1px solid var(--rule);
+  }
+  .meta b { color: var(--ink-2); font-weight: 600; }
+
+  .shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 28px 96px;
+    display: grid;
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+
+  nav.toc {
+    position: sticky;
+    top: 24px;
+    padding-top: 44px;
+    font-size: 0.86rem;
+  }
+  nav.toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    counter-reset: toc;
+  }
+  nav.toc a {
+    color: var(--ink-2);
+    text-decoration: none;
+    display: block;
+    border-left: 1px solid var(--rule);
+    padding: 1px 0 1px 12px;
+  }
+  nav.toc a::before {
+    counter-increment: toc;
+    content: counter(toc, decimal-leading-zero) " ";
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-3);
+  }
+  nav.toc a:hover, nav.toc a:focus-visible {
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+
+  main { padding-top: 44px; min-width: 0; }
+  main > section { margin-bottom: 68px; scroll-margin-top: 24px; }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+  h2 .num {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    display: block;
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+  }
+  h3 {
+    font-family: var(--font-body);
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: 0.005em;
+    margin: 32px 0 8px;
+  }
+  h4 {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-3);
+    font-weight: 600;
+    margin: 26px 0 6px;
+  }
+  p { margin: 0 0 14px; max-width: 68ch; }
+  ul, ol { max-width: 68ch; padding-left: 20px; margin: 0 0 14px; }
+  li { margin-bottom: 6px; }
+  a { color: var(--accent-ink); text-underline-offset: 2px; }
+  strong { font-weight: 650; }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+    background: var(--surface-2);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 0.5px 4px;
+    word-break: break-word;
+  }
+  pre {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--ink-3);
+    border-radius: 2px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 0 0 16px;
+  }
+  pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+  pre .c { color: var(--ink-3); }
+  pre .k { color: var(--accent); }
+
+  .scroll { overflow-x: auto; margin: 0 0 18px; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.88rem;
+    min-width: 520px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 12px 8px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  th {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    font-weight: 600;
+    border-bottom-color: var(--ink-3);
+  }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--font-mono); padding-right: 0; }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 0 0 24px;
+  }
+  .stat { background: var(--surface); padding: 16px 18px; display: flex; flex-direction: column; gap: 2px; }
+  .stat .v { font-family: var(--font-mono); font-size: 1.6rem; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .stat .l { font-size: 0.76rem; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.07em; }
+  .stat .d { font-size: 0.8rem; color: var(--ink-2); }
+
+  .note {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-top: 2px solid var(--accent);
+    padding: 16px 18px;
+    margin: 0 0 20px;
+  }
+  .note .h {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .note p:last-child, .note ul:last-child { margin-bottom: 0; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .tag::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .t-st { color: var(--st); }
+  .t-lt { color: var(--lt); }
+  .t-ep { color: var(--ep); }
+  .t-sem { color: var(--sem); }
+  .pass { color: var(--ok); font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; }
+  .fail { color: var(--bad); font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; }
+
+  figure {
+    margin: 26px 0 28px;
+    padding: 0;
+  }
+  figure svg {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+  }
+  figcaption {
+    font-size: 0.84rem;
+    color: var(--ink-2);
+    margin-top: 10px;
+    max-width: 66ch;
+  }
+  .svg-box { fill: var(--surface); stroke: currentColor; stroke-width: 1; }
+  .svg-fill { fill: var(--surface-2); stroke: var(--rule); stroke-width: 1; }
+  .svg-t { fill: currentColor; font-family: "Segoe UI", system-ui, sans-serif; font-size: 12.5px; font-weight: 600; }
+  .svg-s { fill: var(--ink-3); font-family: "Cascadia Mono", Consolas, monospace; font-size: 10.5px; font-weight: 400; }
+  .svg-l { fill: var(--ink-2); font-family: "Cascadia Mono", Consolas, monospace; font-size: 10.5px; }
+  .svg-line { stroke: currentColor; stroke-width: 1.2; fill: none; }
+  .svg-block { stroke: var(--accent); stroke-width: 1.2; fill: none; stroke-dasharray: 5 4; }
+  .svg-accent-t { fill: var(--accent); font-family: "Cascadia Mono", Consolas, monospace; font-size: 10.5px; }
+
+  footer.end {
+    border-top: 1px solid var(--rule);
+    margin-top: 8px;
+    padding-top: 18px;
+    font-size: 0.84rem;
+    color: var(--ink-3);
+    max-width: 68ch;
+  }
+
+  a:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 980px) {
+    .shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    nav.toc { position: static; padding-top: 34px; }
+    nav.toc ol { flex-direction: row; flex-wrap: wrap; gap: 6px 16px; }
+    nav.toc a { border-left: 0; padding-left: 0; }
+    main { padding-top: 30px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <span class="kicker">VLearn Codelabs · Day 17 · Track 3</span>
+    <h1>Bốn lớp ký ức của một agent</h1>
+    <p class="lede">Giải thích toàn bộ bài lab Multi-Memory Agent với Zep: lý thuyết từng lớp memory, kiến trúc dữ liệu, luồng chạy từ seed đến chấm điểm, bốn hàm retrieval đã viết, và cách đọc con số trong report.</p>
+    <div class="meta">
+      <span><b>Repo</b> Day17-Track3-ZepMemory4Agent</span>
+      <span><b>Student</b> Duong Ngoc Hai · 2A202601748</span>
+      <span><b>Practice</b> 11/11 PASS</span>
+      <span><b>Golden v3</b> 20/20</span>
+      <span><b>Baseline</b> 2/11</span>
+      <span><b>Ngày chạy</b> 2026-08-17</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="toc" aria-label="Mục lục">
+    <ol>
+      <li><a href="#ket-qua">Kết quả</a></li>
+      <li><a href="#tai-sao">Vì sao agent cần memory</a></li>
+      <li><a href="#bon-lop">Bốn lớp ký ức</a></li>
+      <li><a href="#zep">Zep hoạt động thế nào</a></li>
+      <li><a href="#kien-truc">Kiến trúc &amp; dữ liệu</a></li>
+      <li><a href="#luong">Luồng end-to-end</a></li>
+      <li><a href="#code">Bốn hàm đã viết</a></li>
+      <li><a href="#budget">Context budget 10/4/3/3</a></li>
+      <li><a href="#benchmark">Đọc benchmark</a></li>
+      <li><a href="#privacy">Privacy &amp; governance</a></li>
+      <li><a href="#orchestration">Orchestration &amp; UI</a></li>
+      <li><a href="#chay-lai">Chạy lại &amp; bài học</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <section id="ket-qua">
+      <h2><span class="num">01</span>Kết quả cuối cùng</h2>
+      <p>Toàn bộ pipeline đã chạy thật trên Zep Cloud V3 (không mock), sau một lần xóa sạch user và seed lại — nghĩa là kết quả tái lập được, không phụ thuộc trạng thái cũ của cloud.</p>
+
+      <div class="stats">
+        <div class="stat"><span class="v">11/11</span><span class="l">Practice PASS</span><span class="d">hit rate 100%</span></div>
+        <div class="stat"><span class="v">20/20</span><span class="l">Golden v3</span><span class="d">perfect → bonus 10/10</span></div>
+        <div class="stat"><span class="v">2/11</span><span class="l">No-memory</span><span class="d">hit rate 18.2%</span></div>
+        <div class="stat"><span class="v">1150<span style="font-size:0.7em"> ms</span></span><span class="l">Latency TB</span><span class="d">retrieval, không tính LLM</span></div>
+        <div class="stat"><span class="v">19.1<span style="font-size:0.7em">%</span></span><span class="l">Token reduction</span><span class="d">so với full source</span></div>
+      </div>
+
+      <p>Ngưỡng đạt của lab là 9/11 (80%). Bài này pass toàn bộ 11 case practice — gồm case khó nhất về scope (E09 — cách ly hai user) và case mixed phải ghép hai lớp memory dưới ngân sách token (E07) — rồi pass tiếp cả 20 case của golden set v3 (bộ mix-heavy: 10/20 case là mixed).</p>
+
+      <div class="note">
+        <span class="h">Điều quan trọng nhất trong bài</span>
+        <p>Không phải “agent trả lời hay hơn”, mà là <strong>đúng scope</strong>: mỗi loại ký ức có phạm vi riêng (thread / user / knowledge dùng chung). Nhầm <code>user_id</code> với <code>graph_id</code> là vừa rò dữ liệu người khác, vừa lấy sai tri thức — và scorer bắt được điều đó vì nó khớp marker nguyên văn, không cho LLM “nói đỡ”.</p>
+      </div>
+    </section>
+
+    <section id="tai-sao">
+      <h2><span class="num">02</span>Vì sao một agent cần memory</h2>
+      <p>Một LLM tự nó không có ký ức. Mỗi lần gọi API là một lần “sinh ra rồi chết đi”: model chỉ thấy đúng những gì nằm trong context window của request đó. Cảm giác “nó nhớ tôi” hoàn toàn là do hệ thống bên ngoài <em>chọn lại</em> nội dung cũ và dán vào prompt.</p>
+
+      <p>Từ đó sinh ra ba ràng buộc thực tế:</p>
+      <ul>
+        <li><strong>Context window là hữu hạn và đắt.</strong> Nhét cả lịch sử vào prompt tăng chi phí tuyến tính, tăng latency, và làm loãng tín hiệu (lost-in-the-middle).</li>
+        <li><strong>Không phải thứ gì cũng đáng nhớ.</strong> “Filler turn 3 về logging” là rác; “deadline thứ Sáu 16:00” là ràng buộc phải sống sót qua mọi lần nén.</li>
+        <li><strong>Ký ức có chủ sở hữu.</strong> Preference của Minh không được xuất hiện trong câu trả lời cho Lan. Chính sách retry payment thì lại phải dùng chung cho cả hai.</li>
+      </ul>
+
+      <p>Vì vậy memory không phải “một cái database”, mà là <strong>một hệ thống phân lớp</strong>: mỗi lớp có nguồn ghi khác nhau, vòng đời khác nhau, cách truy xuất khác nhau và ngân sách token khác nhau. Bài lab này dựng đúng bốn lớp đó rồi đo xem chúng có thực sự trả về bằng chứng đúng hay không.</p>
+
+      <h3>Vì sao chấm bằng marker chứ không bằng LLM</h3>
+      <p>Evaluator chỉ làm hai việc với text đã retrieve: chuẩn hóa hoa/thường + khoảng trắng, rồi kiểm tra mọi chuỗi trong <code>must_contain_all</code> có mặt và không chuỗi nào trong <code>must_not_contain</code> xuất hiện. Không có LLM-as-judge. Lý do rất thực dụng: nếu để model chấm, một retrieval rỗng vẫn có thể được cứu bằng kiến thức nền của model, và ta sẽ không bao giờ biết lớp memory nào đang hỏng.</p>
+      <pre><code><span class="c"># src/evaluate.py</span>
+def score_case(case, retrieved):
+    text = normalize(retrieved)
+    missing = [x for x in case.get("must_contain_all", []) if normalize(x) not in text]
+    forbidden = [x for x in case.get("must_not_contain", []) if normalize(x) in text]
+    return not missing and not forbidden, missing, forbidden</code></pre>
+      <p>Hệ quả cho người viết code: <strong>evidence phải là văn bản gốc</strong>. Một bản tóm tắt “đúng ý” nhưng đánh rơi mã <code>PAYMENT-RULE-3</code> vẫn bị chấm là fail — và đó chính là bẫy của <code>scope="auto"</code> ở lớp semantic.</p>
+    </section>
+
+    <section id="bon-lop">
+      <h2><span class="num">03</span>Bốn lớp ký ức</h2>
+      <p>Cách phân lớp trong lab mượn thuật ngữ từ khoa học nhận thức, nhưng mỗi lớp ở đây được định nghĩa bằng <em>scope kỹ thuật</em> rất cụ thể, chứ không phải bằng cảm giác.</p>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Lớp</th><th>Scope</th><th>Backend</th><th>Case</th><th>Bằng chứng phải có</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag t-st">short_term</span></td>
+              <td>Thread đang chạy</td>
+              <td><code>ShortTermMemory</code> local</td>
+              <td>E01, E10</td>
+              <td>ORCHID-27; deadline còn sau compaction</td>
+            </tr>
+            <tr>
+              <td><span class="tag t-lt">long_term</span></td>
+              <td>Một user, xuyên thread</td>
+              <td>Zep user graph + Context Block</td>
+              <td>E02, E03, E08, E09</td>
+              <td>Preference, open loop, recency, isolation</td>
+            </tr>
+            <tr>
+              <td><span class="tag t-ep">episodic</span></td>
+              <td>Một user, theo sự kiện</td>
+              <td>Zep <code>graph.search(user_id, "episodes")</code></td>
+              <td>E04, E05</td>
+              <td>Trajectory, outcome, reflection</td>
+            </tr>
+            <tr>
+              <td><span class="tag t-sem">semantic</span></td>
+              <td>Tri thức dùng chung</td>
+              <td>Zep standalone graph theo <code>graph_id</code></td>
+              <td>E06, E11</td>
+              <td>PAYMENT-RULE-3, CONN-POOL-FIRST</td>
+            </tr>
+            <tr>
+              <td>mixed</td>
+              <td>Ghép lớp</td>
+              <td><code>ContextBudgetManager</code></td>
+              <td>E07</td>
+              <td>Python + Idempotency-Key cùng lúc</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Short-term: nén mà không đánh mất ràng buộc</h3>
+      <p>Lớp này chạy hoàn toàn local, không cần cloud. Nó mô phỏng thứ mọi chat app phải làm: cửa sổ hội thoại đầy thì phải bỏ bớt. Lab so sánh ba chiến lược:</p>
+      <ul>
+        <li><strong>buffer</strong> — giữ tất cả. Không mất gì, nhưng token phình tuyến tính; không dùng được lâu dài.</li>
+        <li><strong>summary</strong> — nén phần cũ, giữ 2 lượt gần nhất.</li>
+        <li><strong>sliding</strong> — giữ summary + durable notes + cửa sổ N lượt gần nhất. Đây là mặc định của lab.</li>
+      </ul>
+      <p>Điểm kỹ thuật đáng học nằm ở <code>extract_durable_notes</code>: trước khi evict, hệ thống quét các lượt cũ tìm dấu hiệu <em>ràng buộc bền</em> — từ khóa (todo, deadline, constraint, decision, preference) và marker viết hoa dạng <code>[A-Z][A-Z0-9-]{5,}</code> — rồi <strong>thăng hạng</strong> chúng thành ghi chú riêng. Nhờ vậy E10 vẫn nhớ <code>REVIEW-DEADLINE-1600</code> sau 8 lần nén, dù lượt gốc đã bị đẩy khỏi cửa sổ.</p>
+
+      <figure>
+        <svg viewBox="0 0 880 250" role="img" aria-label="Compaction giữ lại ràng buộc: lượt 1 chứa REVIEW-DEADLINE-1600 được thăng hạng thành durable note trước khi bị evict, 6 lượt cuối nằm trong cửa sổ recent, phần giữa bị nén vào summary">
+          <line x1="40" y1="70" x2="840" y2="70" class="svg-line" />
+          <g class="svg-s">
+            <rect x="34" y="56" width="14" height="28" rx="2" style="fill:var(--accent);stroke:none" />
+            <text x="41" y="46" text-anchor="middle" class="svg-accent-t">m1</text>
+          </g>
+          <g>
+            <rect x="70" y="58" width="12" height="24" rx="2" class="svg-fill" />
+            <rect x="106" y="58" width="12" height="24" rx="2" class="svg-fill" />
+            <rect x="142" y="58" width="12" height="24" rx="2" class="svg-fill" />
+            <rect x="178" y="58" width="12" height="24" rx="2" class="svg-fill" />
+            <rect x="214" y="58" width="12" height="24" rx="2" class="svg-fill" />
+            <rect x="250" y="58" width="12" height="24" rx="2" class="svg-fill" />
+            <rect x="286" y="58" width="12" height="24" rx="2" class="svg-fill" />
+            <rect x="322" y="58" width="12" height="24" rx="2" class="svg-fill" />
+          </g>
+          <g>
+            <rect x="500" y="58" width="12" height="24" rx="2" class="svg-box" />
+            <rect x="536" y="58" width="12" height="24" rx="2" class="svg-box" />
+            <rect x="572" y="58" width="12" height="24" rx="2" class="svg-box" />
+            <rect x="608" y="58" width="12" height="24" rx="2" class="svg-box" />
+            <rect x="644" y="58" width="12" height="24" rx="2" class="svg-box" />
+            <rect x="680" y="58" width="12" height="24" rx="2" class="svg-box" />
+          </g>
+          <path d="M 496 96 L 496 108 L 696 108 L 696 96" class="svg-line" />
+          <text x="596" y="126" text-anchor="middle" class="svg-l">RECENT_TURNS · 6 lượt gần nhất</text>
+
+          <path d="M 66 96 L 66 108 L 340 108 L 340 96" class="svg-line" />
+          <text x="203" y="126" text-anchor="middle" class="svg-l">bị evict khỏi cửa sổ → nén vào SESSION_SUMMARY</text>
+
+          <path d="M 41 40 L 41 24 L 300 24" class="svg-block" marker-end="url(#a1)" />
+          <text x="310" y="28" class="svg-accent-t">extract_durable_notes(): giữ nguyên văn marker</text>
+
+          <rect x="40" y="170" width="330" height="56" class="svg-box" style="stroke:var(--accent)" />
+          <text x="56" y="192" class="svg-t">DURABLE_NOTES</text>
+          <text x="56" y="211" class="svg-s">user: Constraint: REVIEW-DEADLINE-1600 … Friday 16:00</text>
+
+          <rect x="410" y="170" width="430" height="56" class="svg-fill" />
+          <text x="426" y="192" class="svg-t">Kết quả E10</text>
+          <text x="426" y="211" class="svg-s">8 compaction · 6 message giữ lại · 2 note · 195 token · PASS</text>
+
+          <path d="M 41 88 L 41 168" class="svg-block" marker-end="url(#a1)" />
+          <defs>
+            <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)" />
+            </marker>
+          </defs>
+        </svg>
+        <figcaption>Compaction không phải là “xóa bớt cho gọn”: lượt cũ bị đẩy khỏi cửa sổ, nhưng ràng buộc trong đó được thăng hạng thành durable note nên vẫn nằm trong context. Đó là lý do E10 pass sau 8 lần nén.</figcaption>
+      </figure>
+
+      <h3>Long-term: sự thật về người dùng, sống qua mọi thread</h3>
+      <p>Đây là lớp trả lời câu hỏi “người này là ai, đang vướng gì”. Nó phải sống sót khi thread bị đóng, và phải xử lý được <em>xung đột theo thời gian</em>: hôm nay Minh thích Python, tuần sau công ty bắt buộc TypeScript cho một project cụ thể. Cả hai đều đúng — trong scope của nó.</p>
+
+      <h3>Episodic: chuyện đã xảy ra, kèm bài học</h3>
+      <p>Episodic không lưu “sự thật”, nó lưu <em>sự kiện</em>. Một episode tốt phải giữ đủ ba phần: đã thử gì (tăng timeout 60s — thất bại), kết cục là gì (ClientSession + concurrency=20), và rút ra điều gì (nguyên nhân là connection churn chứ không phải ngưỡng timeout). E04 chấm phần trajectory/outcome, E05 chấm riêng phần reflection — tách ra để lộ đúng lỗi hay gặp: retrieve được kết quả nhưng đánh mất bài học.</p>
+
+      <h3>Semantic: tri thức không thuộc về ai</h3>
+      <p>Chính sách retry payment hay incident playbook là tài sản chung của tổ chức. Nếu ghi chúng vào user graph, mỗi user sẽ có một bản sao (đắt, dễ lệch phiên bản) và tệ hơn — chúng bị trộn lẫn với dữ liệu cá nhân. Vì vậy lab dùng một <strong>standalone graph</strong> riêng, truy vấn bằng <code>graph_id</code>.</p>
+    </section>
+
+    <section id="zep">
+      <h2><span class="num">04</span>Zep hoạt động thế nào</h2>
+      <p>Zep không phải vector store. Nó là <strong>temporal knowledge graph</strong>: khi bạn đẩy message vào một thread, Zep chạy pipeline trích xuất bất đồng bộ để dựng ba loại đối tượng.</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Đối tượng</th><th>Là gì</th><th>Scope truy vấn</th><th>Dùng cho</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Episode</strong></td><td>Mẩu dữ liệu thô đã ingest (message hoặc document)</td><td><code>scope="episodes"</code></td><td>Episodic + semantic — giữ nguyên văn marker</td></tr>
+            <tr><td><strong>Edge / Fact</strong></td><td>Quan hệ đã trích xuất, kèm <code>valid_at</code> / <code>invalid_at</code></td><td><code>scope="edges"</code></td><td>Fact có thời hiệu, giải xung đột recency</td></tr>
+            <tr><td><strong>Node / Entity</strong></td><td>Thực thể đã hợp nhất kèm summary</td><td><code>scope="nodes"</code></td><td>Hồ sơ thực thể, fallback semantic</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Context Block</h3>
+      <p><code>client.thread.get_user_context(thread_id=...)</code> trả về một khối text đã được Zep lắp sẵn cho LLM. Trong lần chạy thật của bài này, khối đó gồm bốn phần:</p>
+      <pre><code>&lt;USER_SUMMARY&gt;  Minh's personal project is ORCHID-27. Minh prefers Python…
+&lt;EPISODES&gt;      trích đoạn message/document theo thứ tự chọn lọc
+&lt;FACTS&gt;         - Minh Nguyen likes Python. (2026-08-01 09:00:00)
+                - The personal demo ORCHID-27 prioritizes Python. (…)
+&lt;ENTITIES&gt;      Name: Minh Nguyen · Label: User · Summary: …</code></pre>
+      <p>Hai đặc tính khiến nó là “long-term” chứ không phải “lịch sử thread”:</p>
+      <ul>
+        <li>Nó được tính từ <em>lát cắt hiện tại</em> của thread (nên phải có ít nhất một message trong thread mới thì Zep mới biết hỏi cái gì) …</li>
+        <li>… nhưng nội dung được kéo từ <em>toàn bộ user graph</em>, tức là cả những thread trước đó. Đó chính là cross-session recall mà E02/E03/E08 kiểm tra.</li>
+      </ul>
+
+      <div class="note">
+        <span class="h">Vì sao phải prime một thread rỗng</span>
+        <p><code>prime_eval_thread</code> tạo mới thread <code>eval-e02</code>, rồi thêm đúng câu hỏi đang chấm với <code>ignore_roles=["user"]</code>. Thread mới chứng minh memory thật sự xuyên session (không phải đọc lại transcript cũ), còn <code>ignore_roles</code> đảm bảo <em>câu hỏi chấm không bị biến thành durable fact</em> của user — nếu không, bộ đánh giá sẽ tự đầu độc chính graph mà nó đang đo.</p>
+      </div>
+
+      <h3>Vì sao <code>scope="auto"</code> hỏng ở lớp semantic</h3>
+      <p>Auto search trả về fact đã trích xuất — đọc rất mượt, nhưng pipeline trích xuất có xu hướng bỏ các mã định danh trần như <code>PAYMENT-RULE-3</code> hay <code>CONN-POOL-FIRST</code> vì chúng không phải quan hệ ngữ nghĩa. Với một trợ lý tổng quát thì không sao; với scorer khớp nguyên văn thì đó là fail. Nên ở đây ta chủ động chọn <code>scope="episodes"</code> để lấy <em>document thô</em>.</p>
+      <p>Một ràng buộc vận hành nữa: <code>graph.search</code> từ chối query dài quá <strong>400 ký tự</strong>. Query trong golden set có thể dài 450–600 ký tự, nên mọi lời gọi đều phải bọc <code>cap_query()</code> — cắt về ranh giới từ gần nhất.</p>
+    </section>
+
+    <section id="kien-truc">
+      <h2><span class="num">05</span>Kiến trúc và dữ liệu</h2>
+      <p>Toàn bộ lab chạy trong Docker Compose với ba service: <code>app</code> (Python 3.12 + zep-cloud SDK), <code>redis</code> và <code>qdrant</code>. Redis và Qdrant <em>không</em> tham gia benchmark — chúng là baseline đối chứng để thấy rõ mình đang mua gì khi dùng managed memory.</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Thành phần</th><th>Vai trò trong lab</th></tr></thead>
+          <tbody>
+            <tr><td>Zep Cloud V3</td><td>User graph, thread, Context Block, episode/edge/node, standalone semantic graph</td></tr>
+            <tr><td><code>ShortTermMemory</code></td><td>Buffer / summary / sliding + compaction, chạy local trong process</td></tr>
+            <tr><td>Redis</td><td>Baseline KV: profile, TTL 90 ngày, danh sách open loop</td></tr>
+            <tr><td>Qdrant</td><td>Baseline vector store cho semantic, để so sánh với graph search</td></tr>
+            <tr><td>LangGraph</td><td>Skeleton orchestration route → retrieve → assemble</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Dataset</h3>
+      <ul>
+        <li><code>data/sessions.json</code> — nguồn thật của evaluator: 2 synthetic user (<code>minh-lab17</code>, <code>lan-lab17</code>), 4 session chia 3 stage, 11 evaluation case.</li>
+        <li><code>data/knowledge.jsonl</code> — 4 document dùng chung, mỗi document kết thúc bằng một marker (<code>PAYMENT-RULE-3</code>, <code>CONN-POOL-FIRST</code>, <code>DELETE-VERIFY-ALL</code>, <code>BUDGET-10-4-3-3</code>).</li>
+        <li><code>data/consent.json</code> — cổng opt-in cho durable memory.</li>
+        <li><code>data/ground_truth.json</code> — bản trích để người đọc; scorer <strong>không</strong> nạp file này.</li>
+      </ul>
+      <p>Ba stage là thiết kế có chủ đích, vì nó tạo ra <em>thời gian</em> trong dữ liệu: stage 1 dựng preference (Python, ORCHID-27), stage 2 thêm sự cố async, stage 3 mới đưa ràng buộc mâu thuẫn (BLUEBIRD-42 phải dùng TypeScript/NestJS). Không có stage thì không có bài toán recency để mà giải.</p>
+
+      <figure>
+        <svg viewBox="0 0 880 330" role="img" aria-label="Luồng seed: sessions.json đi qua cổng consent và PII trước khi vào thread Zep rồi được trích xuất thành user graph; knowledge.jsonl đi thẳng vào shared semantic graph; cả hai chờ wait_for_search xác nhận đã index">
+          <defs>
+            <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+            </marker>
+          </defs>
+
+          <rect x="20" y="50" width="170" height="56" class="svg-box" />
+          <text x="34" y="74" class="svg-t">data/sessions.json</text>
+          <text x="34" y="92" class="svg-s">2 user · 4 session · 3 stage</text>
+
+          <rect x="240" y="50" width="170" height="56" class="svg-box" />
+          <text x="254" y="74" class="svg-t">privacy_guard</text>
+          <text x="254" y="92" class="svg-s">consent + minimize_pii</text>
+
+          <rect x="460" y="50" width="170" height="56" class="svg-box" />
+          <text x="474" y="74" class="svg-t">Zep thread</text>
+          <text x="474" y="92" class="svg-s">minh-s1/s2/s3 · lan-s1</text>
+
+          <rect x="680" y="50" width="170" height="56" class="svg-box" style="stroke:var(--lt)" />
+          <text x="694" y="74" class="svg-t">User graph</text>
+          <text x="694" y="92" class="svg-s">episode · edge · node</text>
+
+          <line x1="190" y1="78" x2="238" y2="78" class="svg-line" marker-end="url(#a2)" />
+          <line x1="410" y1="78" x2="458" y2="78" class="svg-line" marker-end="url(#a2)" />
+          <line x1="630" y1="78" x2="678" y2="78" class="svg-line" marker-end="url(#a2)" />
+          <text x="214" y="42" text-anchor="middle" class="svg-l">stage 1→3</text>
+          <text x="434" y="42" text-anchor="middle" class="svg-l">add_messages</text>
+          <text x="654" y="42" text-anchor="middle" class="svg-l">trích xuất</text>
+
+          <rect x="20" y="180" width="170" height="56" class="svg-box" />
+          <text x="34" y="204" class="svg-t">data/knowledge.jsonl</text>
+          <text x="34" y="222" class="svg-s">4 domain document</text>
+
+          <rect x="240" y="180" width="170" height="56" class="svg-box" />
+          <text x="254" y="204" class="svg-t">graph.add()</text>
+          <text x="254" y="222" class="svg-s">type=json + type=text</text>
+
+          <rect x="680" y="180" width="170" height="56" class="svg-box" style="stroke:var(--sem)" />
+          <text x="694" y="204" class="svg-t">Shared graph</text>
+          <text x="694" y="222" class="svg-s">vinuni-lab17-domain-kb</text>
+
+          <line x1="190" y1="208" x2="238" y2="208" class="svg-line" marker-end="url(#a2)" />
+          <path d="M 410 208 L 678 208" class="svg-line" marker-end="url(#a2)" />
+          <text x="544" y="198" text-anchor="middle" class="svg-l">graph_id — không thuộc user nào</text>
+
+          <rect x="440" y="270" width="410" height="44" class="svg-fill" />
+          <text x="456" y="290" class="svg-t">wait_for_search(probe)</text>
+          <text x="456" y="307" class="svg-s">poll tới khi marker xuất hiện — ingest của Zep là bất đồng bộ</text>
+          <path d="M 765 108 L 765 268" class="svg-block" marker-end="url(#a1)" />
+          <path d="M 765 238 L 765 268" class="svg-block" />
+        </svg>
+        <figcaption>Seed đi theo hai nhánh tách biệt. Nhánh người dùng bắt buộc qua cổng consent + redact PII; nhánh tri thức đi thẳng vào graph dùng chung. Cả hai chỉ được coi là xong khi probe search thấy marker — vì Zep index bất đồng bộ, seed xong không có nghĩa là truy vấn được ngay.</figcaption>
+      </figure>
+
+      <h3>Vì sao cách ly scope lại là chuyện sống còn</h3>
+      <figure>
+        <svg viewBox="0 0 880 300" role="img" aria-label="Ba kho: user graph của Minh, user graph của Lan và shared graph. Search theo user_id chỉ chạm graph của đúng user, search theo graph_id chỉ chạm shared graph; các đường chéo bị chặn là nguyên nhân gây rò dữ liệu hoặc mất marker">
+          <rect x="30" y="30" width="240" height="96" class="svg-box" style="stroke:var(--lt)" />
+          <text x="46" y="54" class="svg-t">User graph · minh-lab17</text>
+          <text x="46" y="74" class="svg-s">ORCHID-27 · Python · async/await</text>
+          <text x="46" y="92" class="svg-s">BLUEBIRD-42 → TypeScript/NestJS</text>
+          <text x="46" y="110" class="svg-s">LAB-REPORT-1600 (16:00)</text>
+
+          <rect x="320" y="30" width="230" height="96" class="svg-box" style="stroke:var(--lt)" />
+          <text x="336" y="54" class="svg-t">User graph · lan-lab17</text>
+          <text x="336" y="74" class="svg-s">LOTUS-88</text>
+          <text x="336" y="92" class="svg-s">Java · Spring Boot</text>
+
+          <rect x="600" y="30" width="250" height="96" class="svg-box" style="stroke:var(--sem)" />
+          <text x="616" y="54" class="svg-t">Shared graph · domain-kb</text>
+          <text x="616" y="74" class="svg-s">PAYMENT-RULE-3 · Idempotency-Key</text>
+          <text x="616" y="92" class="svg-s">CONN-POOL-FIRST · DELETE-VERIFY-ALL</text>
+
+          <rect x="255" y="220" width="240" height="52" class="svg-fill" />
+          <text x="271" y="242" class="svg-t">graph.search(user_id=…)</text>
+          <text x="271" y="260" class="svg-s">E02 · E03 · E04 · E05 · E08 · E09</text>
+
+          <rect x="590" y="220" width="250" height="52" class="svg-fill" />
+          <text x="606" y="242" class="svg-t">graph.search(graph_id=…)</text>
+          <text x="606" y="260" class="svg-s">E06 · E11</text>
+
+          <path d="M 400 218 L 420 130" class="svg-line" marker-end="url(#a2)" />
+          <text x="440" y="180" class="svg-l">đúng user → E09 PASS</text>
+
+          <path d="M 300 218 L 175 130" class="svg-block" />
+          <g stroke="var(--accent)" stroke-width="1.6">
+            <line x1="228" y1="168" x2="244" y2="184" />
+            <line x1="244" y1="168" x2="228" y2="184" />
+          </g>
+          <text x="60" y="164" class="svg-accent-t">rò ORCHID-27 sang Lan</text>
+
+          <path d="M 715 218 L 715 130" class="svg-line" marker-end="url(#a2)" />
+          <text x="726" y="180" class="svg-l">đúng graph → marker nguyên văn</text>
+
+          <path d="M 600 240 L 500 240 L 500 130" class="svg-block" />
+          <g stroke="var(--accent)" stroke-width="1.6">
+            <line x1="492" y1="176" x2="508" y2="192" />
+            <line x1="508" y1="176" x2="492" y2="192" />
+          </g>
+          <text x="512" y="212" class="svg-accent-t">policy thành ký ức cá nhân</text>
+        </svg>
+        <figcaption>Hai lỗi scope kinh điển được vẽ bằng đường gạch có dấu ✗: search personal fact mà không giới hạn user (rò dữ liệu người khác — E09 sẽ fail vì <code>must_not_contain: ORCHID-27</code>), và tìm domain policy trong user graph (lấy được văn phong nhưng mất mã marker).</figcaption>
+      </figure>
+    </section>
+
+    <section id="luong">
+      <h2><span class="num">06</span>Luồng end-to-end khi chấm một case</h2>
+      <p>Evaluator không dùng router LLM. Nó dispatch theo <code>expected_layer</code> ghi trong dataset — chủ ý để tách bạch hai thứ có thể hỏng độc lập: <em>chọn sai lớp</em> và <em>truy xuất sai trong lớp</em>. Bài này chấm cái thứ hai.</p>
+
+      <figure>
+        <svg viewBox="0 0 880 400" role="img" aria-label="Một case đi từ dataset qua dispatch theo expected_layer tới một trong bốn nguồn retrieval; case mixed đi tiếp qua ContextBudgetManager; mọi case kết thúc ở scorer khớp marker rồi ghi report">
+          <rect x="20" y="60" width="180" height="64" class="svg-box" />
+          <text x="34" y="84" class="svg-t">Evaluation case</text>
+          <text x="34" y="102" class="svg-s">id · user_id · thread_id</text>
+          <text x="34" y="118" class="svg-s">query · expected_layer</text>
+
+          <rect x="240" y="60" width="170" height="64" class="svg-box" />
+          <text x="254" y="84" class="svg-t">Dispatch</text>
+          <text x="254" y="102" class="svg-s">theo expected_layer</text>
+          <text x="254" y="118" class="svg-s">(không phải router LLM)</text>
+          <line x1="200" y1="92" x2="238" y2="92" class="svg-line" marker-end="url(#a2)" />
+
+          <rect x="450" y="16" width="250" height="46" class="svg-box" style="stroke:var(--st)" />
+          <text x="464" y="35" class="svg-t">ShortTermMemory (local)</text>
+          <text x="464" y="52" class="svg-s">render(): summary + notes + window</text>
+
+          <rect x="450" y="74" width="250" height="46" class="svg-box" style="stroke:var(--lt)" />
+          <text x="464" y="93" class="svg-t">thread.get_user_context</text>
+          <text x="464" y="110" class="svg-s">+ graph.search(user_id, edges, 20)</text>
+
+          <rect x="450" y="132" width="250" height="46" class="svg-box" style="stroke:var(--ep)" />
+          <text x="464" y="151" class="svg-t">graph.search(user_id)</text>
+          <text x="464" y="168" class="svg-s">scope=episodes · limit 15 · cap 320</text>
+
+          <rect x="450" y="190" width="250" height="46" class="svg-box" style="stroke:var(--sem)" />
+          <text x="464" y="209" class="svg-t">graph.search(graph_id)</text>
+          <text x="464" y="226" class="svg-s">scope=episodes → fallback nodes</text>
+
+          <path d="M 410 92 L 430 92 L 430 39 L 448 39" class="svg-line" marker-end="url(#a2)" />
+          <path d="M 430 92 L 448 92" class="svg-line" marker-end="url(#a2)" />
+          <path d="M 430 92 L 430 155 L 448 155" class="svg-line" marker-end="url(#a2)" />
+          <path d="M 430 92 L 430 213 L 448 213" class="svg-line" marker-end="url(#a2)" />
+
+          <rect x="730" y="74" width="120" height="162" class="svg-box" style="stroke:var(--accent)" />
+          <text x="744" y="112" class="svg-t">assemble</text>
+          <text x="744" y="132" class="svg-s">10/4/3/3</text>
+          <text x="744" y="149" class="svg-s">priority</text>
+          <text x="744" y="166" class="svg-s">trim theo</text>
+          <text x="744" y="183" class="svg-s">layer</text>
+          <text x="744" y="207" class="svg-s">chỉ case</text>
+          <text x="744" y="224" class="svg-s">mixed (E07)</text>
+          <line x1="700" y1="155" x2="728" y2="155" class="svg-line" marker-end="url(#a2)" />
+
+          <rect x="240" y="290" width="400" height="56" class="svg-box" />
+          <text x="256" y="314" class="svg-t">score_case()</text>
+          <text x="256" y="332" class="svg-s">must_contain_all ⊂ text · must_not_contain ∩ text = ∅</text>
+
+          <rect x="680" y="290" width="170" height="56" class="svg-fill" />
+          <text x="694" y="314" class="svg-t">reports/</text>
+          <text x="694" y="332" class="svg-s">benchmark.json · .md · .html</text>
+
+          <path d="M 790 236 L 790 258 L 560 258 L 560 288" class="svg-line" marker-end="url(#a2)" />
+          <text x="700" y="252" text-anchor="middle" class="svg-l">merged_context + budget_breakdown</text>
+          <path d="M 450 248 L 700 248" class="svg-line" />
+          <path d="M 470 248 L 470 274 L 330 274 L 330 288" class="svg-line" marker-end="url(#a2)" />
+          <text x="120" y="278" class="svg-l">case đơn lớp: chấm thẳng evidence</text>
+          <line x1="640" y1="318" x2="678" y2="318" class="svg-line" marker-end="url(#a2)" />
+        </svg>
+        <figcaption>Chỉ case <code>mixed</code> đi qua budget manager; case đơn lớp được chấm thẳng trên evidence thô. Đó là lý do E04/E05 không bị ngân sách 3% cắt mất reflection, còn E07 thì có — và phải đọc <code>budget_breakdown</code> mới biết marker mất ở đâu.</figcaption>
+      </figure>
+
+      <h3>Thứ tự thao tác thực tế trong buổi lab</h3>
+      <ol>
+        <li><code>docker compose build</code> + <code>up -d redis qdrant</code> → <code>python -m src.smoke</code>: xác nhận Redis, Qdrant, dataset và biến môi trường. Smoke <em>không</em> chứng minh API key hợp lệ.</li>
+        <li><code>pytest -q</code> → 11 pass, 1 skip (test golden chỉ chạy khi giảng viên phát file).</li>
+        <li><code>evaluate --impl no_memory</code> → baseline 2/11: chỉ E01 và E10 pass vì bằng chứng còn nằm trong thread hiện tại.</li>
+        <li><code>python -m src.seed</code> → reset user, dựng shared graph, ingest 3 stage, chờ probe. Đây mới là integration check thật với Zep.</li>
+        <li><code>evaluate --impl student --reuse-seeded</code> → chạy 11 case, ghi <code>reports/benchmark.{json,md}</code>.</li>
+        <li><code>compare_reports</code> → <code>reports/comparison.md</code>.</li>
+        <li>Privacy drill: <code>forget</code> rồi <code>forget --verify-only</code>, chụp bằng chứng, <strong>sau đó</strong> mới seed lại.</li>
+      </ol>
+      <p>Thứ tự ở bước 7 không thể đảo: seed lại trước khi verify sẽ làm user vừa xóa xuất hiện trở lại, và bằng chứng privacy mất giá trị.</p>
+    </section>
+
+    <section id="code">
+      <h2><span class="num">07</span>Bốn hàm đã viết</h2>
+      <p>Toàn bộ phần code bắt buộc nằm trong <code>src/memory_student.py</code>. Mỗi hàm là một <em>contract</em>: nhận scope, trả về text thuần (không trả object SDK).</p>
+
+      <h4>1 / 4 — retrieve_long_term</h4>
+      <pre><code>prime_eval_thread(self.client, user_id, thread_id, query)   <span class="c"># scaffold: thread mới + ignore_roles</span>
+user_context = self.client.thread.get_user_context(thread_id=thread_id)
+context_block = str(getattr(user_context, "context", "") or "")
+
+<span class="c"># Harden: Context Block là bản tóm tắt, nên bổ sung fact nguyên văn kèm thời hiệu.</span>
+facts = self.client.graph.search(
+    user_id=user_id,            <span class="c"># CHỈ user graph — không bao giờ graph_id</span>
+    query=cap_query(query),     <span class="c"># Zep chặn query &gt; 400 ký tự</span>
+    scope="edges", limit=20,    <span class="c"># limit thấp làm rơi fact open-loop của E03</span>
+)
+return join_nonempty([context_block, render_graph_search(facts)], sep="\n\n")</code></pre>
+      <p>Ba quyết định đáng nói: (a) lời gọi edge search được bọc <code>try/except</code> — nó là lớp gia cố, hỏng thì không được kéo sập cả retrieval; (b) <code>limit=20</code> chọn theo E03, vì fact deadline không nằm trong top-5; (c) trả <code>.context</code> chứ không phải object, đúng chữ ký <code>-&gt; str</code>.</p>
+
+      <h4>2 / 4 — retrieve_episodic</h4>
+      <pre><code>results = self.client.graph.search(
+    user_id=user_id, query=cap_query(query),
+    scope="episodes", limit=15,
+)
+return render_graph_search(results, episode_char_cap=320)</code></pre>
+      <p><code>episode_char_cap=320</code> là con số có lý do: episode chứa reflection của E05 dài khoảng 165 ký tự, nên 320 giữ trọn nó, đồng thời chặn các lượt hội thoại dài chiếm hết chỗ khi lớp này bị ép vào ngân sách 3%. Cắt quá ngắn thì mất <code>ASYNC-FIX-20</code> ở cuối câu; không cắt thì vài episode dài đẩy reflection ra khỏi budget.</p>
+
+      <h4>3 / 4 — retrieve_semantic</h4>
+      <pre><code>capped = cap_query(query)
+try:
+    text = search("episodes")     <span class="c"># document thô → giữ PAYMENT-RULE-3</span>
+except Exception:
+    text = ""
+if not text.strip():
+    text = search("nodes")        <span class="c"># fallback khi account/SDK khác scope</span>
+return self._dedupe_documents(text)   <span class="c"># mỗi document một entry, giữ marker</span></code></pre>
+      <p>Khác với reference chỉ fallback khi có exception, ở đây fallback cả khi kết quả <em>rỗng</em> — vì trường hợp hỏng phổ biến hơn là API trả 200 với danh sách rỗng chứ không ném lỗi. Và scope phải là <code>graph_id</code>: đây là tri thức chung, không phải ký ức của Minh.</p>
+      <p>Bước <code>_dedupe_documents</code> được thêm sau khi golden G18 fail: seed ingest mỗi document hai lần (JSON + text summary) nên nửa ngân sách semantic bị trả cho bản sao. Chi tiết ở <a href="#benchmark">phần 09</a>.</p>
+
+      <h4>4 / 4 — assemble_context</h4>
+      <pre><code>return self.budget.assemble(layers)   <span class="c"># -&gt; tuple[str, dict[str, dict[str, int]]]</span></code></pre>
+      <p>Ngắn nhưng dễ sai ở chỗ hợp đồng: phải trả <strong>nguyên tuple</strong> (merged text + breakdown), giữ nguyên bốn key layer, và không tự nối chuỗi bằng tay — thứ tự ưu tiên và việc cắt tỉa thuộc về <code>ContextBudgetManager</code>.</p>
+
+      <div class="note">
+        <span class="h">Bẫy im lặng</span>
+        <p>Nếu nuốt exception rồi trả chuỗi rỗng, case sẽ fail với <code>missing=[...]</code> mà không có <code>error</code> — trông như “retrieve sai” trong khi thật ra là “gọi API sai”. Luôn đọc trường <code>error</code> trong <code>benchmark.json</code> trước khi chỉnh limit hay scope.</p>
+      </div>
+    </section>
+
+    <section id="budget">
+      <h2><span class="num">08</span>Context budget 10/4/3/3</h2>
+      <p>Ngân sách là cách biến “memory” từ một ý tưởng đẹp thành một thành phần có chi phí kiểm soát được. Với context 8000 token, lab dành đúng 20% cho toàn bộ memory và giữ 80% còn lại cho system prompt, tool schema và câu trả lời.</p>
+
+      <figure>
+        <svg viewBox="0 0 880 250" role="img" aria-label="Bản đồ ngân sách 8000 token: short-term 800, long-term 320, episodic 240, semantic 240, phần còn lại 6400 dành cho prompt và câu trả lời; bên dưới là số thực tế của case E07">
+          <text x="20" y="26" class="svg-t">Ngân sách trên 8000 token</text>
+          <rect x="20" y="40" width="80" height="34" style="fill:var(--st);stroke:none" />
+          <rect x="100" y="40" width="32" height="34" style="fill:var(--lt);stroke:none" />
+          <rect x="132" y="40" width="24" height="34" style="fill:var(--ep);stroke:none" />
+          <rect x="156" y="40" width="24" height="34" style="fill:var(--sem);stroke:none" />
+          <rect x="180" y="40" width="640" height="34" class="svg-fill" />
+          <text x="24" y="92" class="svg-s">10% · 800</text>
+          <text x="100" y="92" class="svg-s">4% · 320</text>
+          <text x="132" y="106" class="svg-s">3% · 240</text>
+          <text x="200" y="92" class="svg-s">3% · 240 (semantic)</text>
+          <text x="500" y="62" class="svg-l">80% còn lại: system prompt · tool · câu trả lời</text>
+
+          <text x="20" y="146" class="svg-t">E07 thực tế — thang 10 token = 1 px</text>
+
+          <text x="20" y="176" class="svg-s">long_term</text>
+          <rect x="110" y="164" width="150" height="16" class="svg-fill" />
+          <rect x="110" y="164" width="32" height="16" style="fill:var(--lt);stroke:none" />
+          <text x="270" y="176" class="svg-l">raw 1501 → used 324 (limit 320) · phần đuôi bị cắt</text>
+
+          <text x="20" y="204" class="svg-s">semantic</text>
+          <rect x="110" y="192" width="24" height="16" class="svg-fill" />
+          <rect x="110" y="192" width="5.3" height="16" style="fill:var(--sem);stroke:none" />
+          <text x="270" y="204" class="svg-l">raw 53 → used 53 (limit 240) · lọt trọn sau khi khử trùng lặp</text>
+
+          <text x="20" y="232" class="svg-s">merged</text>
+          <rect x="110" y="220" width="39" height="16" style="fill:var(--accent);stroke:none" />
+          <text x="270" y="232" class="svg-l">390 token gửi cho model — chứa cả Python lẫn Idempotency-Key</text>
+        </svg>
+        <figcaption>Long-term bị cắt hơn 4/5 nội dung mà E07 vẫn pass, vì <code>trim()</code> giữ phần <em>đầu</em> — nơi Context Block đặt USER_SUMMARY và các fact xếp hạng cao nhất. Nếu marker cần chấm nằm ở đuôi, cách sửa đúng là làm retrieval gọn hơn ở nguồn, không phải nâng <code>LAB_CONTEXT_TOKENS</code>.</figcaption>
+      </figure>
+
+      <p>Cơ chế cụ thể của <code>ContextBudgetManager</code>:</p>
+      <ul>
+        <li>Ước lượng token bằng heuristic 4 ký tự/token — cố tình đơn giản, độc lập với tokenizer của model.</li>
+        <li>Duyệt theo thứ tự cố định <code>short_term → long_term → episodic → semantic</code>, cắt từng lớp về hạn mức của nó rồi bọc trong thẻ <code>&lt;LAYER&gt;</code>.</li>
+        <li>Trả kèm breakdown <code>limit / raw / used</code> cho từng lớp — chính là công cụ debug khi một marker biến mất giữa evidence thô và merged text.</li>
+      </ul>
+      <p>Thứ tự ưu tiên không tùy tiện: thông tin càng gần hiện tại càng khó thay thế. Người dùng vừa nói gì (short-term) là thứ không nguồn nào khác cung cấp được; còn tri thức chung (semantic) luôn có thể lấy lại ở lượt sau bằng một truy vấn khác.</p>
+    </section>
+
+    <section id="benchmark">
+      <h2><span class="num">09</span>Đọc benchmark</h2>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Case</th><th>Lớp</th><th>Kết quả</th><th class="num">Latency ms</th><th class="num">Token</th><th class="num">Reduction</th><th>Bằng chứng chính</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>E01</td><td><span class="tag t-st">short</span></td><td><span class="pass">PASS</span></td><td class="num">0.1</td><td class="num">133</td><td class="num">0%</td><td>ORCHID-27</td></tr>
+            <tr><td>E02</td><td><span class="tag t-lt">long</span></td><td><span class="pass">PASS</span></td><td class="num">1444.7</td><td class="num">1498</td><td class="num">0%</td><td>Python (xuyên session)</td></tr>
+            <tr><td>E03</td><td><span class="tag t-lt">long</span></td><td><span class="pass">PASS</span></td><td class="num">2536.0</td><td class="num">1484</td><td class="num">0%</td><td>benchmark report · 16:00</td></tr>
+            <tr><td>E04</td><td><span class="tag t-ep">epi</span></td><td><span class="pass">PASS</span></td><td class="num">897.2</td><td class="num">668</td><td class="num">0%</td><td>ClientSession · concurrency=20 · ASYNC-FIX-20</td></tr>
+            <tr><td>E05</td><td><span class="tag t-ep">epi</span></td><td><span class="pass">PASS</span></td><td class="num">334.1</td><td class="num">648</td><td class="num">0%</td><td>connection churn · timeout threshold</td></tr>
+            <tr><td>E06</td><td><span class="tag t-sem">sem</span></td><td><span class="pass">PASS</span></td><td class="num">822.3</td><td class="num">53</td><td class="num">88.5%</td><td>Idempotency-Key · max-3-retries</td></tr>
+            <tr><td>E07</td><td>mixed</td><td><span class="pass">PASS</span></td><td class="num">1696.2</td><td class="num">390</td><td class="num">31.0%</td><td>Python + Idempotency-Key</td></tr>
+            <tr><td>E08</td><td><span class="tag t-lt">long</span></td><td><span class="pass">PASS</span></td><td class="num">2165.8</td><td class="num">1461</td><td class="num">0%</td><td>BLUEBIRD-42 · TypeScript · NestJS</td></tr>
+            <tr><td>E09</td><td><span class="tag t-lt">long</span></td><td><span class="pass">PASS</span></td><td class="num">2446.0</td><td class="num">805</td><td class="num">0%</td><td>LOTUS-88 · Java · Spring Boot, không có ORCHID-27</td></tr>
+            <tr><td>E10</td><td><span class="tag t-st">short</span></td><td><span class="pass">PASS</span></td><td class="num">0.7</td><td class="num">195</td><td class="num">0%</td><td>REVIEW-DEADLINE-1600 · Friday · 16:00</td></tr>
+            <tr><td>E11</td><td><span class="tag t-sem">sem</span></td><td><span class="pass">PASS</span></td><td class="num">302.5</td><td class="num">52</td><td class="num">90.8%</td><td>connection pooling · CONN-POOL-FIRST</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Memory-enabled vs no-memory</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Chỉ số</th><th class="num">Có memory</th><th class="num">Không memory</th><th class="num">Delta</th></tr></thead>
+          <tbody>
+            <tr><td>Evidence hit rate</td><td class="num">100.0%</td><td class="num">18.2%</td><td class="num">+81.8%</td></tr>
+            <tr><td>Case pass</td><td class="num">11/11</td><td class="num">2/11</td><td class="num">+9</td></tr>
+            <tr><td>Latency trung bình</td><td class="num">1149.6 ms</td><td class="num">0.1 ms</td><td class="num">+1149.5</td></tr>
+            <tr><td>Token reduction</td><td class="num">19.1%</td><td class="num">81.8%</td><td class="num">−62.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="h">Cái bẫy của token reduction</span>
+        <p>Baseline “thắng” 81.8% reduction chỉ vì nó gần như không retrieve gì. Một hệ thống trả về chuỗi rỗng đạt 100% reduction và 0% hit rate. <strong>Reduction chỉ có nghĩa khi đọc kèm hit rate</strong> — đúng như cách người ta không đánh giá cache bằng riêng tỉ lệ miss.</p>
+      </div>
+
+      <h3>Vì sao long-term có reduction 0%</h3>
+      <p>Với E02, full source context chỉ khoảng 221 token (transcript synthetic rất ngắn), trong khi Context Block trả về ~1498 token vì nó tóm tắt cả ba session cộng 20 fact edge. Trên dataset đồ chơi, memory “đắt hơn” việc dán nguyên transcript. Điều đó không sai — nó chỉ nói rằng lợi ích nén xuất hiện khi lịch sử dài ra: chi phí Context Block gần như phẳng theo số session, còn chi phí dán transcript thì tuyến tính. Case semantic cho thấy mặt kia của đồng xu ngay trên dataset này: 53 token thay cho 459 token knowledge base, tức 88.5%.</p>
+
+      <h3>Latency đến từ đâu</h3>
+      <p>Short-term ~0.1 ms vì chạy trong process. Long-term 1.5–2.5 s vì mỗi lần gọi là: xóa thread + tạo thread + ingest query + chờ Context Block + một lần graph search — năm vòng mạng tới Zep Cloud. Trong sản phẩm thật, phần <code>prime_eval_thread</code> sẽ không tồn tại (thread đã có sẵn), nên chi phí thực tế chủ yếu là một lần <code>get_user_context</code>.</p>
+
+      <h3>Golden set v3: 20/20</h3>
+      <p>Bộ golden do giảng viên phát (<code>data/golden_eval.json</code>, nằm trong <code>.gitignore</code>) khó hơn practice ở ba điểm: prompt dài và nhiễu (tới 353 ký tự, lẫn chuyện đời thường trước khi vào câu hỏi), <strong>10/20 case là mixed</strong> (practice chỉ có 1), và marker được trộn chéo giữa các lớp — ví dụ G20 đòi cùng lúc <code>HOLD-ALPHA-0900</code> (short-term fixture), <code>NestJS</code> (long-term) và <code>Idempotency-Key</code> (semantic).</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Nhóm</th><th class="num">Case</th><th>Đặc thù</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tag t-st">short_term</span></td><td class="num">2</td><td>G01 dùng fixture 16 lượt; constraint standup phải sống qua compaction</td></tr>
+            <tr><td><span class="tag t-lt">long_term</span></td><td class="num">4</td><td>G06 cấm 4 marker của Minh cùng lúc — isolation chặt hơn E09</td></tr>
+            <tr><td><span class="tag t-ep">episodic</span></td><td class="num">2</td><td>G08 đòi cả reflection lẫn mã sự cố trong một lần retrieve</td></tr>
+            <tr><td><span class="tag t-sem">semantic</span></td><td class="num">2</td><td>G09 đòi 4 marker của cùng một document</td></tr>
+            <tr><td>mixed</td><td class="num">10</td><td>2–3 lớp/case, mọi marker phải sống sót qua budget</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Case duy nhất từng fail — và cách sửa đúng chỗ</h4>
+      <p>Lần chạy đầu được 19/20. G18 (episodic + semantic) thiếu <code>BUDGET-10-4-3-3</code>. Đọc <code>budget_breakdown</code> thấy ngay nguyên nhân: semantic raw 369 token bị cắt còn 244 — đúng document chứa marker nằm ở cuối danh sách nên bị trim.</p>
+      <p>Gốc rễ không nằm ở ngân sách mà ở <em>độ đặc của evidence</em>. Seed ingest mỗi document <strong>hai lần</strong> (một bản JSON đầy đủ và một bản text summary), còn renderer thì thêm một dòng <code>metadata=</code> rỗng cho mỗi episode. Nghĩa là quá nửa ngân sách semantic đang trả cho bản sao và nhiễu.</p>
+      <pre><code><span class="c"># src/memory_student.py — gộp mỗi document về một entry, giữ bản ngắn nhất</span>
+marker = cls._MARKER_RE.search(body)          <span class="c"># "Marker: BUDGET-10-4-3-3"</span>
+key = marker.group(1) if marker else body[:120]
+if key not in shortest or len(body) &lt; len(shortest[key]):
+    shortest[key] = body</code></pre>
+      <p>Kết quả: semantic 369 → <strong>184 token</strong>, cả bốn document lọt trọn trong hạn mức 240, G18 pass và toàn bộ golden lên 20/20. Phần thưởng kèm theo trên practice: E06 từ 148 xuống 53 token (reduction 67.8% → 88.5%), E11 còn 52 token, reduction trung bình toàn bộ tăng 14.2% → 19.1%.</p>
+      <div class="note">
+        <span class="h">Bài học vận hành</span>
+        <p>Khi một marker biến mất ở merged text nhưng vẫn có trong evidence thô, có hai cách sửa: nới <code>LAB_CONTEXT_TOKENS</code> (che triệu chứng, và đẩy chi phí sang mọi request khác) hoặc làm evidence đặc hơn tại nguồn (khử trùng lặp, bỏ nhiễu). Cách thứ hai vừa giữ đúng ngân sách, vừa cải thiện luôn các case đang pass.</p>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <h2><span class="num">10</span>Privacy và governance</h2>
+      <p>Phần này không sinh điểm tự động nhưng là phần “kỹ sư” nhất của bài: memory là dữ liệu cá nhân tồn tại lâu dài, nên nó phải có cổng vào, có tối thiểu hóa và có đường ra.</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Guardrail</th><th>Cài ở đâu</th><th>Chặn điều gì</th></tr></thead>
+          <tbody>
+            <tr><td>Consent gate</td><td><code>require_memory_consent</code> gọi ở <code>ingest_user_stage</code></td><td>Ghi durable memory cho user chưa opt-in</td></tr>
+            <tr><td>PII minimization</td><td><code>minimize_pii</code> trong <code>add_messages</code></td><td>Email và số điện thoại đi vào cloud</td></tr>
+            <tr><td>Chống tự đầu độc</td><td><code>ignore_roles</code> trong <code>prime_eval_thread</code></td><td>Câu hỏi chấm trở thành fact của user</td></tr>
+            <tr><td>Right to be forgotten</td><td><code>src/forget.py</code></td><td>Xóa nửa vời: kiểm tra cả Zep lẫn Redis</td></tr>
+            <tr><td>Background write</td><td><code>heartbeat --dry-run</code></td><td>Agent tự cấp quyền ghi khi không ai nhìn</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Bằng chứng drill đã chạy</h4>
+      <pre><code>$ python -m src.forget --user-id minh-lab17
+Deleting user-scoped memory for 'minh-lab17'...
+Redis keys deleted: 3
+Zep user absent: True
+Redis user keys remaining: 0
+
+$ python -m src.forget --user-id minh-lab17 --verify-only
+Zep user absent: True
+Redis user keys remaining: 0
+Shared semantic KB remains intact because it stores domain knowledge, not user PII.</code></pre>
+      <p>Chi tiết đáng chú ý: shared graph <strong>không</strong> bị xóa. Xóa theo yêu cầu của một người không được phá tri thức chung của tổ chức — và ngược lại, đó chính là lý do phải tách domain knowledge ra khỏi user graph ngay từ đầu. Quyết định về scope ở phần retrieval và quyết định về quyền xóa ở đây là cùng một quyết định.</p>
+
+      <p>Sau khi chụp bằng chứng, dữ liệu được seed lại và benchmark chạy lại từ đầu — vẫn 11/11. Đây là kiểm chứng phụ có giá trị: pipeline tái lập được từ trạng thái trắng, không dựa vào dư âm của lần seed trước.</p>
+    </section>
+
+    <section id="orchestration">
+      <h2><span class="num">11</span>Orchestration và mini-product</h2>
+
+      <h3>LangGraph: route → retrieve → assemble</h3>
+      <p>Ngoài evaluator, repo có một skeleton LangGraph ba node dùng chính bốn hàm student. Router ở đây là heuristic từ khóa, chỉ để minh họa: trong sản phẩm thật, việc chọn lớp memory nên tách khỏi việc truy xuất, vì hai thứ này hỏng theo cách khác nhau và cần đo riêng.</p>
+      <pre><code>$ python -m src.demo_agent --impl student
+route: ['episodic']
+&lt;EPISODIC&gt;
+EPISODE: Cach hieu qua la reuse aiohttp ClientSession va dat concurrency=20…
+[...trimmed...]
+budget: episodic raw 255 → used 244 / limit 240</code></pre>
+      <p>Lần chạy này minh họa rất rõ mặt trái của ngân sách chặt: dưới hạn mức 240 token, đúng episode chứa reflection bị cắt cụt. Trong evaluator, E05 pass vì case đơn lớp không đi qua budget — nhưng nếu đưa memory này vào một agent thật với ngân sách 3%, ta phải xếp hạng episode tốt hơn (hoặc nén chúng) chứ không phải nới ngân sách.</p>
+
+      <h3>Redis + Qdrant: cái giá của tự làm</h3>
+      <p><code>src/local_baseline.py</code> dựng đúng thứ mà nhiều nhóm tự viết: profile trong Redis (TTL 7776000s = 90 ngày) và semantic search bằng Qdrant. Nó chạy trong ~0 ms và không gửi dữ liệu đi đâu. Cái nó không có: trích xuất fact, hợp nhất thực thể, thời hiệu <code>valid_at/invalid_at</code>, và summary tự cập nhật. Nói cách khác, Redis+Qdrant cho bạn <em>kho</em>, Zep cho bạn <em>kho + pipeline hiểu nội dung</em>; phần chênh lệch chính là thứ giải được E08.</p>
+
+      <h3>Bảo trì episodic</h3>
+      <p><code>episodic_maintenance</code> minh họa ba cơ chế mà mọi hệ memory dài hạn cuối cùng đều cần: <strong>importance decay</strong> (điểm giảm theo thời gian, có trọng số theo tác động), <strong>LRU</strong> (ứng viên evict là episode lâu không dùng và ít giá trị), và <strong>consolidation</strong> — gộp trajectory + outcome + reflection thành một “reusable strategy” ngắn: <em>“kiểm tra connection pooling và client lifecycle trước khi tăng timeout”</em>. Bước consolidation mới là thứ biến ký ức thành năng lực.</p>
+
+      <h3>UI demo</h3>
+      <p>Bonus mini-product (<code>src/demo_ui.py</code>) hoàn thiện hàm <code>retrieve_for_case</code>: dựng short-term từ fixture hoặc thread đã seed, chọn lớp durable theo <code>expected_layer</code>, gọi đúng ba retriever, rồi assemble. Giao diện hiển thị badge lớp nào đã kích hoạt, số token từng lớp so với hạn mức, merged context, và cho phép chat tiếp trên cùng user/thread — Gemini chỉ dùng để sinh câu trả lời, còn bằng chứng vẫn đến từ memory. Kiểm chứng headless cho thấy đúng contract: E01 kích hoạt <code>short_term</code>, E04 <code>short_term + episodic</code>, E07 <code>short_term + long_term + semantic</code> (486 token merged).</p>
+    </section>
+
+    <section id="chay-lai">
+      <h2><span class="num">12</span>Chạy lại và bài học</h2>
+
+      <h4>Tái lập toàn bộ</h4>
+      <pre><code>docker compose build &amp;&amp; docker compose up -d redis qdrant
+docker compose run --rm app pytest -q
+docker compose run --rm app python -m src.smoke
+docker compose run --rm app python -m src.evaluate --impl no_memory
+docker compose run --rm app python -m src.seed
+docker compose run --rm app python -m src.evaluate --impl student --reuse-seeded
+docker compose run --rm app python -m src.compare_reports
+docker compose run --rm app python -m src.forget --user-id minh-lab17
+docker compose run --rm app python -m src.forget --user-id minh-lab17 --verify-only
+docker compose run --rm app python -m src.seed          <span class="c"># chỉ sau khi đã chụp bằng chứng</span>
+
+<span class="c"># Golden (sau khi giảng viên phát data/golden_eval.json — file này gitignore)</span>
+docker compose run --rm app python -m src.evaluate --impl student --reuse-seeded --golden</code></pre>
+
+      <h3>Năm điều rút ra</h3>
+      <ol>
+        <li><strong>Scope là thiết kế, không phải tham số.</strong> <code>user_id</code> hay <code>graph_id</code> quyết định cả tính đúng, tính riêng tư lẫn quyền xóa. Chọn sai thì không có limit hay prompt nào cứu được.</li>
+        <li><strong>Chấm bằng bằng chứng nguyên văn mới lộ ra lỗi retrieval.</strong> Nếu để LLM chấm, cả bốn lớp có thể hỏng mà điểm vẫn đẹp.</li>
+        <li><strong>Nén phải có khái niệm “ràng buộc bền”.</strong> Tóm tắt trôi chảy mà đánh mất deadline là tóm tắt hỏng; durable notes là cơ chế rẻ nhất để giữ lại chúng.</li>
+        <li><strong>Xung đột giải theo scope + recency, không ghi đè mù.</strong> BLUEBIRD-42 dùng TypeScript <em>và</em> ORCHID-27 vẫn dùng Python — cả hai cùng đúng, khác phạm vi.</li>
+        <li><strong>Metric hiệu quả phải đi kèm metric đúng.</strong> Token reduction một mình luôn khen kẻ không làm gì.</li>
+        <li><strong>Sửa ở nguồn, đừng nới ngân sách.</strong> G18 mất marker vì evidence loãng; khử trùng lặp giải quyết triệt để và làm mọi case khác nhẹ hơn theo.</li>
+      </ol>
+
+      <footer class="end">
+        <p>Artefact kèm theo: <code>reports/benchmark.{json,md,html}</code> · <code>reports/benchmark_no_memory.*</code> · <code>reports/comparison.md</code> · <code>reports/golden_benchmark.{json,md,html}</code> · <code>README_submission.md</code> · log đầy đủ trong <code>submission/logs/</code>. Không nộp <code>.env</code> (chứa API key) và <code>data/golden_eval*.json</code> — cả hai đã nằm trong <code>.gitignore</code>.</p>
+      </footer>
+    </section>
+
+  </main>
+</div>

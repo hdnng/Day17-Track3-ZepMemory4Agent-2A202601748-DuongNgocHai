@@ -1,0 +1,60 @@
+FACT: The personal demo ORCHID-27 prioritizes Python. [valid_at=2026-08-01T09:00:20Z, invalid_at=None]
+FACT: Minh Nguyen's personal project is ORCHID-27. [valid_at=2026-08-01T09:00:00Z, invalid_at=2026-08-01T09:00:20Z]
+FACT: The assistant is demonstrating the personal demo ORCHID-27. [valid_at=2026-08-01T09:00:20Z, invalid_at=None]
+FACT
+
+========================================================================
+Session 2 -> Session 3: episodic trajectory
+========================================================================
+EPISODE: Minh con open loop hay deadline nao chua hoan thanh?
+
+========================================================================
+Session 3: scoped update / recency
+========================================================================
+<USER_SUMMARY>
+Minh's personal project is named ORCHID-27. Minh prefers Python and dislikes Java. When explaining code, Minh prefers short examples.
+
+Minh is working on two projects: ORCHID-27, a personal project, and BLUEBIRD-42, a company project. The backend for BLUEBIRD-42 must use TypeScript with NestJS; Python is not to be used for its backend. For personal demos like ORCHID-27, Python is preferred. Minh has a deadline for a benchmark report by Saturday at 16:00 for LAB-REPORT-1600. Minh is currently debugging async HTTP and has tried increasing the timeout to 60s without success. The main issue identified is connection churn, not a timeout threshold, related to the ASYNC-FIX-20 incident. The trajectory to resolve the issue is to increase client session concurrency to 20.
+
+Minh prefers Python and dislikes Java. For personal projects like ORCHID-27, Python is the preferred language. For the company project BLUEBIRD-42, TypeScript with NestJS is mandatory for the backend. Minh has a recurring goal to complete a benchmark report by Saturday at 16:00.
+
+When explaining code, use short examples. Prioritize Python and avoid Java for personal demos like ORCHID-27.
+</USER_SUMMARY>
+
+<EPISODES>
+Episodes are source message or document excerpts shown in selection order.
+  - Created At: 2026-08-01 09:00:00
+    Source: message
+    Content: [user] {
+  "user_id": "minh-lab17",
+  "first_name": "Minh",
+  "last_name": "Nguyen",
+  "user_alias": "Minh Nguyen"
+}: Ten du an ca nhan cua toi la ORCHID-27. Toi thich Python va khong thich Java. Khi giai thich code, hay dung vi du ngan.
+</EPISODES>
+
+<FACTS>
+The timestamp shown for each fact is the reference time of the source message that introduced it — i.e. when the fact was first mentioned. `date unknown` means no reference time is recorded for the source message.
+  - Minh Nguyen likes Python. (2026-08-01 09:00:00)
+  - Minh Nguyen's personal project is ORCHID-27. (2026-08-01 09:00:00)
+  - Minh Nguyen is learning async/await. (date unknown)
+  - When explaining code, Minh Nguyen prefers to use short examples. (2026-08-01 09:00:00)
+  - The personal demo ORCHID-27 prioritizes Python. (2026-08-01 09:00:20)
+  - The assistant is demonstrating the personal demo ORCHID-27. (2026-08-01 09:00:20)
+</FACTS>
+
+<ENTITIES>
+  - Name: Minh Nguyen
+    Label: User
+    Attributes:
+      email: 
+      first_name: Minh
+      last_name: Nguyen
+      name: Minh Nguyen
+      role_type: user
+      user_id: minh-lab17
+    Summary: Minh's personal project is named ORCHID-27. Minh prefers Python and dislikes Java. When explaining code, Minh prefers short examples.
+
+Minh is working on two projects: ORCHID-27, a personal project, and BLUEBIRD-42, a company project. The backend for BLUEBIRD-42 must use TypeScript with NestJS; Python is not to be used for its backend. For personal demos like ORCHID-27, Python is preferred. Minh has a deadline for a benchmark report by Saturday at 16:00 for LAB-REPORT-1600. Minh is currently debugging async HTTP and has tried increasing the timeout to 60s without success. The main issue identified is connection churn, not a timeout threshold, related to the ASYNC-FIX-20 incident. The trajectory to resolve the issue is to increase client session concurrency to 20.
+
+Minh prefers Python and dislikes Java. For personal projects like ORCHID-27, Python is the preferred language. For the company project BLUEBIRD-42, TypeScript with NestJS is mandatory for the backend. Minh has a recurring goal to complete a benchma

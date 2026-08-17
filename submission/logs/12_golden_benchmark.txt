@@ -1,0 +1,113 @@
+G01 short_term: Minh vua scroll len tren cai thread nay va bi ngap trong toan bo
+may cau linh tinh ve spacing, naming, log, test, docs, lint. Minh khong can tom 
+tat cai dam filler do. Minh chi can biet: sau khi hoi thoai da dai ra, 
+constraint nao van con hieu luc va khong duoc phep roi? Neu co ma constraint, 
+gio giac, hay noi ghi du lieu thi niem het ra, dung bo sot.
+  PASS  0.3 ms
+G02 short_term: Ngoi code muon qua nen minh hay quen dung nhung gi minh vua noi 
+trong thread nay. Dung keo thong tin tu session khac. Trong cuoc noi chuyen hien
+tai, demo ca nhan minh dat ten hay ma gi, va khi giai thich code minh muon ban 
+trinh bay kieu nao?
+  PASS  0.1 ms
+G06 long_term: Minh la Lan, sap giai trinh doi tac ve lua chon backend. Nhac 
+lai: san pham cua minh dung ngon ngu va framework nao? Chi thong tin cua Lan, 
+dung gan du an nguoi khac vao.
+  PASS  1546.8 ms
+G09 semantic: Viet module POST /payments, gap 429 hoac 5xx thi retry the nao de 
+khong tru tien hai lan? Can cach danh dau request, kieu cho, gioi han so lan, va
+ma rule thanh toan.
+  PASS  254.7 ms
+G10 semantic: So agent bi tran token. Lab co ty le phan bo context cho bon tang 
+nho. Nac lai ty le do va ma dinh danh ngan sach neu co.
+  PASS  248.9 ms
+G14 mixed: Minh la Lan, phap ly hoi gat truoc khi bat memory tren san pham. Viet
+hop dong ngan: backend minh dang dung ngon ngu/framework nao, va quy tac luu/xoa
+bo nho ca nhan trong lab yeu cau opt-in va verify ra sao? Chi stack cua Lan.
+  PASS  1784.9 ms
+G03 long_term: Cuoi tuan minh ngoi mot minh lam demo rieng, khong hop team. 
+Truoc khi chon template, nhac lai: khi lam viec ca nhan minh uu tien ngon ngu 
+nao, va ma du an demo ca nhan la gi? Chi preference cua Minh, dung tron so thich
+dong nghiep.
+  PASS  1521.3 ms
+G04 long_term: Mai hop mentor, toi nay minh muon don open-loop. Liet ke viec 
+chua dong, deadline, va ma dinh danh task. Can du ba manh de ghi vao note hop.
+  PASS  1626.3 ms
+G07 episodic: Lan debug async HTTP tren staging minh co thu tang timeout len rat
+lau. Cach do co work khong? Fix nao that su work, sua o dau, concurrency ra sao,
+ma su co la gi? Ke ca thu that bai lan fix cuoi.
+  PASS  286.9 ms
+G08 episodic: Viet post-mortem async, minh muon root cause dung ban chat. Loi 
+goc la timeout threshold hay van de khac? Trich reflection luc do va ma su co de
+dan vao bao cao.
+  PASS  320.3 ms
+G11 mixed: Minh sap viet script ca nhan de tai hien su co latency, muon code 
+dung ngon ngu minh thich khi lam mot minh, dong thoi bam sat playbook incident 
+cua lab chu dung vo tang timeout. Ghep hai manh: stack ca nhan cua Minh, va buoc
+bat buoc trong playbook truoc khi noi timeout. Dung lay stack cua ai khac.
+  PASS  1822.4 ms
+G13 mixed: Minh muon viet retry POST payment nhung so lap lai dung cai loi async
+HTTP da tung dinh. Ghep: fix async nao that su work o lan truoc, va policy 
+payment yeu cau danh dau request the nao de khong tao don trung.
+  PASS  542.3 ms
+G15 mixed: Toi nay minh viet tool ca nhan de tai hien su co HTTP roi sua dung 
+playbook. Can ba manh: ngon ngu minh thich khi lam mot minh, ma su co async lan 
+truoc, va buoc playbook truoc khi tang timeout. Scope Minh, dung tron Lan.
+  PASS  2057.4 ms
+G16 mixed: Minh con mot open-loop phai nop truoc deadline, dong thoi muon ghi 
+chu retry payment dung so lan toi da theo policy. Nac lai ma task/deadline con 
+dang do, va gioi han retry chinh thuc trong lab.
+  PASS  2239.5 ms
+G17 mixed: Minh sap giai thich coroutine cho ban, dong thoi can nhac policy 
+retry payment vao vi du. Minh hoc kieu nao thi de nho? Va request retry payment 
+phai mang header nao? Dung lay style hay stack cua nguoi khac.
+  PASS  1839.6 ms
+G18 mixed: Viet slide hau kiem: root cause async lan truoc la gi, va khi cat 
+context cho agent thi ty le budget bon tang nho trong lab la bao nhieu? Can 
+reflection that va ma ngan sach, khong doan.
+  PASS  604.0 ms
+G19 mixed: Chuan bi demo ca nhan: ten/ma project rieng cua Minh la gi, va lan 
+async HTTP truoc minh reuse client nhu the nao (kem ma su co)? Khong can policy 
+domain chung, chi memory cua Minh.
+  PASS  1916.3 ms
+G05 long_term: Sep hoi chuan hoa backend du an cong ty, minh hay lan voi stack 
+project rieng. Rieng du an cong ty cua Minh: bat buoc ngon ngu va framework nao?
+Python ca nhan co duoc dung backend du an do khong? Scope dung theo du an cong 
+ty.
+  PASS  2234.9 ms
+G12 mixed: Cong ty yeu cau chinh context window cho agent tren dung backend du 
+an cong ty. Minh can biet stack bat buoc cua BLUEBIRD va ty le budget bon tang 
+nho trong lab de cau hinh cho dung, khong dung so thich project rieng.
+  PASS  1718.8 ms
+G20 mixed: Trong thread nay minh vua nhac constraint gio standup. Lat nua minh 
+se them retry payment vao dung backend du an cong ty. Ghep ba manh: constraint 
+standup con hieu luc trong thread, stack bat buoc cua backend cong ty, va cach 
+danh dau request payment de khong trung don.
+  PASS  2977.7 ms
+Golden 20/20. Bonus = 10/10.
+            Benchmark summary            
+┏━━━━━━┳━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━┓
+┃ Case ┃ Layer      ┃ Pass ┃ Latency ms ┃
+┡━━━━━━╇━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━┩
+│ G01  │ short_term │ yes  │        0.3 │
+│ G02  │ short_term │ yes  │        0.1 │
+│ G06  │ long_term  │ yes  │     1546.8 │
+│ G09  │ semantic   │ yes  │      254.7 │
+│ G10  │ semantic   │ yes  │      248.9 │
+│ G14  │ mixed      │ yes  │     1784.9 │
+│ G03  │ long_term  │ yes  │     1521.3 │
+│ G04  │ long_term  │ yes  │     1626.3 │
+│ G07  │ episodic   │ yes  │      286.9 │
+│ G08  │ episodic   │ yes  │      320.3 │
+│ G11  │ mixed      │ yes  │     1822.4 │
+│ G13  │ mixed      │ yes  │      542.3 │
+│ G15  │ mixed      │ yes  │     2057.4 │
+│ G16  │ mixed      │ yes  │     2239.5 │
+│ G17  │ mixed      │ yes  │     1839.6 │
+│ G18  │ mixed      │ yes  │      604.0 │
+│ G19  │ mixed      │ yes  │     1916.3 │
+│ G05  │ long_term  │ yes  │     2234.9 │
+│ G12  │ mixed      │ yes  │     1718.8 │
+│ G20  │ mixed      │ yes  │     2977.7 │
+└──────┴────────────┴──────┴────────────┘
+Reports: /workspace/reports/golden_benchmark.json | 
+/workspace/reports/golden_benchmark.md

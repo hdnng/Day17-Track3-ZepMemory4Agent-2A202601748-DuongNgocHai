@@ -84,6 +84,17 @@ def layer_badge(layer: str) -> str:
     return f'<span class="lab-badge" style="background:{color}">{layer}</span>'
 
 
+def session_messages(user_id: str, thread_id: str) -> list[dict[str, str]]:
+    """Seeded turns of one thread, used as the short-term backlog for a case."""
+    for user in load_dataset().get("users", []):
+        if user.get("user_id") != user_id:
+            continue
+        for session in user.get("sessions", []):
+            if session.get("thread_id") == thread_id:
+                return list(session.get("messages", []))
+    return []
+
+
 def retrieve_for_case(
     memory: StudentMemory,
     case: dict[str, Any],
@@ -107,8 +118,46 @@ def retrieve_for_case(
       * Keep user_id and thread_id from the loaded case.
       * Finish with memory.assemble_context(layers).
     """
-    _ = (memory, case, extra_messages, settings, ShortTermMemory)
-    raise NotImplementedError("BONUS TODO: run student retrieval for the loaded case")
+    layers: dict[str, str] = {
+        "short_term": "",
+        "long_term": "",
+        "episodic": "",
+        "semantic": "",
+    }
+
+    # 1. Short-term: fixture messages when the case ships one, otherwise the
+    #    seeded thread turns, then whatever the user typed in this session.
+    short_term = ShortTermMemory(strategy="sliding", max_recent_messages=6, pressure_tokens=450)
+    base_messages = case.get("fixture_messages") or session_messages(
+        case.get("user_id", ""), case.get("thread_id", "")
+    )
+    for msg in list(base_messages) + list(extra_messages or []):
+        short_term.add(msg["role"], msg["content"])
+    layers["short_term"] = short_term.render()
+
+    # 2. Durable layers follow the case contract, exactly like src/evaluate.py.
+    expected = case.get("expected_layer", "mixed")
+    if expected == "mixed":
+        wanted = case.get("retrieve_layers") or ["long_term", "semantic"]
+    else:
+        wanted = [expected]
+
+    query = case.get("query", "")
+    user_id = case.get("user_id", "")
+    thread_id = case.get("thread_id", "")
+
+    if "long_term" in wanted:
+        layers["long_term"] = memory.retrieve_long_term(
+            user_id=user_id, thread_id=thread_id, query=query
+        )
+    if "episodic" in wanted:
+        layers["episodic"] = memory.retrieve_episodic(user_id, query)
+    if "semantic" in wanted:
+        layers["semantic"] = memory.retrieve_semantic(settings.semantic_graph_id, query)
+
+    # 3. One budget pass over all four layers.
+    merged_context, budget = memory.assemble_context(layers)
+    return {"merged_context": merged_context, "layers": layers, "budget": budget}
 
 
 def main() -> None:

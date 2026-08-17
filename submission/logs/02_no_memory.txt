@@ -1,0 +1,51 @@
+E01 short_term: Ten du an ca nhan toi vua nhac la gi?
+  PASS  0.1 ms
+E06 semantic: Quy tac retry POST payment la gi?
+  FAIL  0.0 ms
+  missing: ['Idempotency-Key', 'max-3-retries', 'exponential-backoff']
+E09 long_term: Lan uu tien stack backend nao cho LOTUS-88?
+  FAIL  0.0 ms
+  missing: ['LOTUS-88', 'Java', 'Spring Boot']
+E10 short_term: Deadline review cu la khi nao?
+  PASS  0.8 ms
+E02 long_term: Voi demo ca nhan cua Minh, ngon ngu uu tien la gi?
+  FAIL  0.0 ms
+  missing: ['Python']
+E03 long_term: Minh con open loop hay deadline nao chua hoan thanh?
+  FAIL  0.0 ms
+  missing: ['benchmark report', '16:00']
+E04 episodic: Lan truoc Minh fix async HTTP timeout bang cach nao?
+  FAIL  0.0 ms
+  missing: ['ClientSession', 'concurrency=20', 'ASYNC-FIX-20']
+E05 episodic: Reflection cua su co async la gi, tang timeout co phai root fix 
+khong?
+  FAIL  0.0 ms
+  missing: ['connection churn', 'timeout threshold']
+E07 mixed: Hay chon huong dan code retry payment phu hop voi preference ca nhan 
+cua Minh.
+  FAIL  0.0 ms
+  missing: ['Python', 'Idempotency-Key']
+E11 semantic: Theo incident playbook, truoc khi tang timeout can kiem tra gi?
+  FAIL  0.0 ms
+  missing: ['connection pooling', 'CONN-POOL-FIRST']
+E08 long_term: Backend cua BLUEBIRD-42 bat buoc dung stack gi?
+  FAIL  0.0 ms
+  missing: ['BLUEBIRD-42', 'TypeScript', 'NestJS']
+            Benchmark summary            
+┏━━━━━━┳━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━┓
+┃ Case ┃ Layer      ┃ Pass ┃ Latency ms ┃
+┡━━━━━━╇━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━┩
+│ E01  │ short_term │ yes  │        0.1 │
+│ E06  │ semantic   │ no   │        0.0 │
+│ E09  │ long_term  │ no   │        0.0 │
+│ E10  │ short_term │ yes  │        0.8 │
+│ E02  │ long_term  │ no   │        0.0 │
+│ E03  │ long_term  │ no   │        0.0 │
+│ E04  │ episodic   │ no   │        0.0 │
+│ E05  │ episodic   │ no   │        0.0 │
+│ E07  │ mixed      │ no   │        0.0 │
+│ E11  │ semantic   │ no   │        0.0 │
+│ E08  │ long_term  │ no   │        0.0 │
+└──────┴────────────┴──────┴────────────┘
+Reports: /workspace/reports/benchmark_no_memory.json | 
+/workspace/reports/benchmark_no_memory.md

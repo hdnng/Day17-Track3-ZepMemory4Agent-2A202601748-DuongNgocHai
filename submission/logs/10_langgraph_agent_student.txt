@@ -1,0 +1,19 @@
+route: ['episodic']
+
+merged context:
+
+<EPISODIC>
+EPISODE: Ten du an ca nhan cua toi la ORCHID-27. Toi thich Python va khong thich Java. Khi giai thich code, hay dung vi du ngan.
+EPISODE: Toi dang hoc async/await va hay nham coroutine voi Task. Neu sau nay gap chu de nay, hay giai thich bang timeline.
+EPISODE: Cap nhat moi: voi du an cong ty BLUEBIRD-42, backend bat buoc dung TypeScript voi NestJS; khong dung Python cho backend du an nay. Preference Python van dung cho demo ca nhan ORCHID-27.
+EPISODE: TODO: hoan thanh benchmark report truoc thu Sau luc 16:00. Day la open loop LAB-REPORT-1600.
+EPISODE: Voi demo ca nhan cua Minh, ngon ngu uu tien la gi?
+EPISODE: Hom nay toi debug async HTTP. Toi da thu tang timeout len 60s nhung van fail.
+EPISODE: Minh con open loop hay deadline nao chua hoan thanh?
+EPISODE: Hay chon huong dan code retry payment phu hop voi preference ca nhan cua Minh.
+EPISODE: Cach hieu qua la reuse aiohttp ClientSession va dat concurrency=20. Reflection: loi chinh la connection 
+[...trimmed...]
+</EPISODIC>
+
+budget:
+ {'short_term': {'limit_tokens': 800, 'raw_tokens': 0, 'used_tokens': 0}, 'long_term': {'limit_tokens': 320, 'raw_tokens': 0, 'used_tokens': 0}, 'episodic': {'limit_tokens': 240, 'raw_tokens': 255, 'used_tokens': 244}, 'semantic': {'limit_tokens': 240, 'raw_tokens': 0, 'used_tokens': 0}}

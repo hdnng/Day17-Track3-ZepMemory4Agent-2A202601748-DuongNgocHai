@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 17 Report — student (golden)</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; background:#0f172a; color:#e2e8f0; }
+  .wrap { max-width:1100px; margin:0 auto; padding:28px 20px 60px; }
+  h1 { margin:0 0 4px; font-size:1.7rem; }
+  .meta { opacity:.7; font-size:.85rem; margin-bottom:18px; }
+  .banner { padding:10px 16px; border-radius:10px; font-weight:700;
+            color:#fff; background:#16a34a; margin-bottom:20px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+           gap:12px; margin-bottom:24px; }
+  .card { background:#1e293b; border-radius:12px; padding:14px 16px; }
+  .card .label { font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; opacity:.65; }
+  .card .value { font-size:1.5rem; font-weight:700; margin-top:4px; }
+  .card .sub { font-size:.75rem; opacity:.6; margin-top:2px; }
+  .progress { height:14px; background:#334155; border-radius:999px; overflow:hidden; margin-bottom:24px; }
+  .progress > i { display:block; height:100%; width:100.0%;
+                  background:linear-gradient(90deg,#22c55e,#16a34a); }
+  table { width:100%; border-collapse:collapse; font-size:.88rem; margin-bottom:28px; }
+  th, td { padding:8px 10px; text-align:left; border-bottom:1px solid #334155; }
+  th { font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; opacity:.7; }
+  td.num { text-align:right; font-variant-numeric:tabular-nums; }
+  td.issue { color:#fca5a5; font-size:.8rem; }
+  tr.row-ok td:first-child { border-left:3px solid #16a34a; }
+  tr.row-bad td:first-child { border-left:3px solid #dc2626; }
+  .pill { display:inline-block; padding:2px 9px; border-radius:999px; color:#fff;
+          font-size:.72rem; font-weight:600; }
+  .tag { padding:2px 9px; border-radius:6px; font-size:.72rem; font-weight:700; }
+  .tag.ok { background:#16a34a; color:#fff; }
+  .tag.bad { background:#dc2626; color:#fff; }
+  details.case, details.log { background:#1e293b; border-radius:10px; padding:10px 14px;
+                              margin-bottom:10px; border-left:4px solid #334155; }
+  details.case.ok { border-left-color:#16a34a; }
+  details.case.bad { border-left-color:#dc2626; }
+  summary { cursor:pointer; font-size:.9rem; }
+  pre { white-space:pre-wrap; word-break:break-word; background:#0f172a;
+        padding:12px; border-radius:8px; font-size:.8rem; overflow-x:auto; }
+  .budget ul { margin:6px 0; padding-left:18px; font-size:.82rem; }
+  h2 { margin-top:30px; font-size:1.15rem; }
+  @media (prefers-color-scheme: light) {
+    body { background:#f8fafc; color:#0f172a; }
+    .card, details.case, details.log { background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+    pre { background:#f1f5f9; }
+    th, td { border-bottom-color:#e2e8f0; }
+    .progress { background:#e2e8f0; }
+  }
+</style></head>
+<body><div class="wrap">
+  <h1>Lab 17 — Memory Benchmark Report</h1>
+  <div class="meta">Source: <code>golden_benchmark.json</code> · generated 2026-08-17 10:00:19</div>
+  <div class="banner">PERFECT — all cases passed · 20/20 passed (100%)</div>
+  <div class="cards"><div class="card" style="border-top:4px solid #0ea5e9"><div class="label">Implementation</div><div class="value">student</div><div class="sub">kind: golden</div></div><div class="card" style="border-top:4px solid #16a34a"><div class="label">Passed</div><div class="value">20/20</div></div><div class="card" style="border-top:4px solid #7c3aed"><div class="label">Hit rate</div><div class="value">100.0%</div></div><div class="card" style="border-top:4px solid #d97706"><div class="label">Avg latency</div><div class="value">1277.2 ms</div></div><div class="card" style="border-top:4px solid #0891b2"><div class="label">Token reduction</div><div class="value">13.9%</div></div><div class="card" style="border-top:4px solid #16a34a"><div class="label">Golden bonus</div><div class="value">10/10</div><div class="sub">20/20 required</div></div></div>
+  <div class="progress"><i></i></div>
+  <h2>Cases</h2>
+  <table><thead><tr>
+    <th>Case</th><th>Layer</th><th>Result</th><th>Latency</th>
+    <th>Tokens</th><th>Reduction</th><th>Issue</th>
+  </tr></thead><tbody><tr class="row-ok"><td><b>G01</b></td><td><span class="pill" style="background:#2563eb">short_term</span></td><td><span class="tag ok">PASS</span></td><td class="num">0.3</td><td class="num">227</td><td class="num">0.0%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G02</b></td><td><span class="pill" style="background:#2563eb">short_term</span></td><td><span class="tag ok">PASS</span></td><td class="num">0.1</td><td class="num">133</td><td class="num">0.0%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G06</b></td><td><span class="pill" style="background:#059669">long_term</span></td><td><span class="tag ok">PASS</span></td><td class="num">1546.8</td><td class="num">770</td><td class="num">0.0%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G09</b></td><td><span class="pill" style="background:#7c3aed">semantic</span></td><td><span class="tag ok">PASS</span></td><td class="num">254.7</td><td class="num">148</td><td class="num">67.8%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G10</b></td><td><span class="pill" style="background:#7c3aed">semantic</span></td><td><span class="tag ok">PASS</span></td><td class="num">248.9</td><td class="num">95</td><td class="num">79.3%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G14</b></td><td><span class="pill" style="background:#0891b2">mixed</span></td><td><span class="tag ok">PASS</span></td><td class="num">1784.9</td><td class="num">431</td><td class="num">0.0%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G03</b></td><td><span class="pill" style="background:#059669">long_term</span></td><td><span class="tag ok">PASS</span></td><td class="num">1521.3</td><td class="num">1502</td><td class="num">0.0%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G04</b></td><td><span class="pill" style="background:#059669">long_term</span></td><td><span class="tag ok">PASS</span></td><td class="num">1626.3</td><td class="num">1485</td><td class="num">0.0%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G07</b></td><td><span class="pill" style="background:#d97706">episodic</span></td><td><span class="tag ok">PASS</span></td><td class="num">286.9</td><td class="num">664</td><td class="num">0.0%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G08</b></td><td><span class="pill" style="background:#d97706">episodic</span></td><td><span class="tag ok">PASS</span></td><td class="num">320.3</td><td class="num">676</td><td class="num">0.0%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G11</b></td><td><span class="pill" style="background:#0891b2">mixed</span></td><td><span class="tag ok">PASS</span></td><td class="num">1822.4</td><td class="num">439</td><td class="num">22.3%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G13</b></td><td><span class="pill" style="background:#0891b2">mixed</span></td><td><span class="tag ok">PASS</span></td><td class="num">542.3</td><td class="num">406</td><td class="num">28.1%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G15</b></td><td><span class="pill" style="background:#0891b2">mixed</span></td><td><span class="tag ok">PASS</span></td><td class="num">2057.4</td><td class="num">736</td><td class="num">0.0%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G16</b></td><td><span class="pill" style="background:#0891b2">mixed</span></td><td><span class="tag ok">PASS</span></td><td class="num">2239.5</td><td class="num">484</td><td class="num">14.3%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G17</b></td><td><span class="pill" style="background:#0891b2">mixed</span></td><td><span class="tag ok">PASS</span></td><td class="num">1839.6</td><td class="num">484</td><td class="num">14.3%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G18</b></td><td><span class="pill" style="background:#0891b2">mixed</span></td><td><span class="tag ok">PASS</span></td><td class="num">604.0</td><td class="num">440</td><td class="num">22.1%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G19</b></td><td><span class="pill" style="background:#0891b2">mixed</span></td><td><span class="tag ok">PASS</span></td><td class="num">1916.3</td><td class="num">581</td><td class="num">0.0%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G05</b></td><td><span class="pill" style="background:#059669">long_term</span></td><td><span class="tag ok">PASS</span></td><td class="num">2234.9</td><td class="num">1505</td><td class="num">0.0%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G12</b></td><td><span class="pill" style="background:#0891b2">mixed</span></td><td><span class="tag ok">PASS</span></td><td class="num">1718.8</td><td class="num">468</td><td class="num">25.9%</td><td class="issue"></td></tr><tr class="row-ok"><td><b>G20</b></td><td><span class="pill" style="background:#0891b2">mixed</span></td><td><span class="tag ok">PASS</span></td><td class="num">2977.7</td><td class="num">609</td><td class="num">3.6%</td><td class="issue"></td></tr></tbody></table>
+  <h2>Evidence</h2>
+  <details class="case ok"><summary><span class="pill" style="background:#2563eb">short_term</span> <b>G01</b> — Minh vua scroll len tren cai thread nay va bi ngap trong toan bo may cau linh tinh ve spacing, naming, log, test, docs, lint. Minh khong can tom tat cai dam filler do. Minh chi can biet: sau khi hoi thoai da dai ra, constraint nao van con hieu luc va khong duoc phep roi? Neu co ma constraint, gio giac, hay noi ghi du lieu thi niem het ra, dung bo sot.</summary><div class="evidence"><b>Retrieved evidence</b><pre>&lt;SESSION_SUMMARY&gt;
+user: Constraint HOLD-ALPHA-0900: standup is 09:00 sharp and must not be forgotten. | assistant: Noted standup constraint. | user: Constraint HOLD-BETA-STAGING: writes go to staging DB only. | assistant: Noted staging constraint. | user: Filler A about button padding. | assistant: Filler A. | user: Filler B about color tokens. | assistant: Filler B. | user: Filler C about copy tone. | assistant: Filler C.
+&lt;/SESSION_SUMMARY&gt;
+&lt;DURABLE_NOTES&gt;
+- user: Constraint HOLD-ALPHA-0900: standup is 09:00 sharp and must not be forgotten.
+- assistant: Noted standup constraint.
+- user: Constraint HOLD-BETA-STAGING: writes go to staging DB only.
+- assistant: Noted staging constraint.
+&lt;/DURABLE_NOTES&gt;
+&lt;RECENT_TURNS&gt;
+user: Filler D about empty states.
+assistant: Filler D.
+user: Filler E about analytics.
+assistant: Filler E.
+user: Filler F about accessibility.
+assistant: Filler F.
+&lt;/RECENT_TURNS&gt;</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#2563eb">short_term</span> <b>G02</b> — Ngoi code muon qua nen minh hay quen dung nhung gi minh vua noi trong thread nay. Dung keo thong tin tu session khac. Trong cuoc noi chuyen hien tai, demo ca nhan minh dat ten hay ma gi, va khi giai thich code minh muon ban trinh bay kieu nao?</summary><div class="evidence"><b>Retrieved evidence</b><pre>&lt;RECENT_TURNS&gt;
+user: Ten du an ca nhan cua toi la ORCHID-27. Toi thich Python va khong thich Java. Khi giai thich code, hay dung vi du ngan.
+assistant: Da hieu: demo ca nhan ORCHID-27, uu tien Python, tranh Java, vi du ngan.
+user: Toi dang hoc async/await va hay nham coroutine voi Task. Neu sau nay gap chu de nay, hay giai thich bang timeline.
+assistant: Toi se uu tien timeline khi giai thich coroutine va Task.
+user: TODO: hoan thanh benchmark report truoc thu Sau luc 16:00. Day la open loop LAB-REPORT-1600.
+&lt;/RECENT_TURNS&gt;</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#059669">long_term</span> <b>G06</b> — Minh la Lan, sap giai trinh doi tac ve lua chon backend. Nhac lai: san pham cua minh dung ngon ngu va framework nao? Chi thong tin cua Lan, dung gan du an nguoi khac vao.</summary><div class="evidence"><b>Retrieved evidence</b><pre>&lt;USER_SUMMARY&gt;
+Lan Tran&#x27;s project is LOTUS-88. They prioritize Java and Spring Boot for backend examples and do not use Python in the backend.
+&lt;/USER_SUMMARY&gt;
+
+&lt;EPISODES&gt;
+Episodes are source message or document excerpts shown in selection order.
+  - Created At: 2026-08-01 11:00:00
+    Source: message
+    Content: [user] {
+  &quot;user_id&quot;: &quot;lan-lab17&quot;,
+  &quot;first_name&quot;: &quot;Lan&quot;,
+  &quot;last_name&quot;: &quot;Tran&quot;,
+  &quot;user_alias&quot;: &quot;Lan Tran&quot;
+}: Toi la Lan. Du an cua toi la LOTUS-88. Toi uu tien Java va Spring Boot, va khong dung Python trong vi du backend.
+  - Created At: 2026-08-01 11:00:20
+    Source: message
+    Content: Lab Assistant (assistant): Da hieu: LOTUS-88, Java + Spring Boot cho backend examples.
+  - Created At: 2026-08-17 09:50:33
+    Source: message
+    Content: [user] {
+  &quot;user_id&quot;: &quot;lan-lab17&quot;,
+  &quot;first_name&quot;: &quot;Lan&quot;,
+  &quot;last_name&quot;: &quot;Tran&quot;,
+  &quot;user_alias&quot;: &quot;Evaluation User&quot;
+}: Lan uu tien stack backend nao cho LOTUS-88?
+&lt;/EPISODES&gt;
+
+&lt;FACTS&gt;
+The timestamp shown for each fact is the reference time of the source message that introduced it — i.e. when the fact was first mentioned. `date unknown` means no reference time is recorded for the source message.
+  - Lan Tran prefers Spring Boot. (202</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#7c3aed">semantic</span> <b>G09</b> — Viet module POST /payments, gap 429 hoac 5xx thi retry the nao de khong tru tien hai lan? Can cach danh dau request, kieu cho, gioi han so lan, va ma rule thanh toan.</summary><div class="evidence"><b>Retrieved evidence</b><pre>EPISODE: For POST /payments, every retryable request MUST send the same Idempotency-Key. Retry only HTTP 429 or transient 5xx errors, use exponential-backoff, and stop after max-3-retries. Marker: PAYMENT-RULE-3.
+EPISODE: Do not persist personal data without explicit opt-in. A deletion request must remove user-scoped memory and be verified across every store. Marker: DELETE-VERIFY-ALL.
+EPISODE: Reserve bounded context for memory. This lab uses short-term 10 percent, long-term 4 percent, episodic 3 percent, semantic 3 percent; trim lower-priority memory first. Marker: BUDGET-10-4-3-3.</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#7c3aed">semantic</span> <b>G10</b> — So agent bi tran token. Lab co ty le phan bo context cho bon tang nho. Nac lai ty le do va ma dinh danh ngan sach neu co.</summary><div class="evidence"><b>Retrieved evidence</b><pre>EPISODE: Do not persist personal data without explicit opt-in. A deletion request must remove user-scoped memory and be verified across every store. Marker: DELETE-VERIFY-ALL.
+EPISODE: Reserve bounded context for memory. This lab uses short-term 10 percent, long-term 4 percent, episodic 3 percent, semantic 3 percent; trim lower-priority memory first. Marker: BUDGET-10-4-3-3.</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#0891b2">mixed</span> <b>G14</b> — Minh la Lan, phap ly hoi gat truoc khi bat memory tren san pham. Viet hop dong ngan: backend minh dang dung ngon ngu/framework nao, va quy tac luu/xoa bo nho ca nhan trong lab yeu cau opt-in va verify ra sao? Chi stack cua Lan.</summary><div class="budget"><b>Budget</b><ul><li><span class="pill" style="background:#2563eb">short_term</span> used <b>0</b> / limit 800 (raw 0)</li><li><span class="pill" style="background:#059669">long_term</span> used <b>324</b> / limit 320 (raw 770)</li><li><span class="pill" style="background:#d97706">episodic</span> used <b>0</b> / limit 240 (raw 0)</li><li><span class="pill" style="background:#7c3aed">semantic</span> used <b>95</b> / limit 240 (raw 95)</li></ul></div><div class="evidence"><b>Retrieved evidence</b><pre>&lt;LONG_TERM&gt;
+&lt;USER_SUMMARY&gt;
+Lan Tran&#x27;s project is LOTUS-88. They prioritize Java and Spring Boot for backend examples and do not use Python in the backend.
+&lt;/USER_SUMMARY&gt;
+
+&lt;EPISODES&gt;
+Episodes are source message or document excerpts shown in selection order.
+  - Created At: 2026-08-17 09:50:33
+    Source: message
+    Content: [user] {
+  &quot;user_id&quot;: &quot;lan-lab17&quot;,
+  &quot;first_name&quot;: &quot;Lan&quot;,
+  &quot;last_name&quot;: &quot;Tran&quot;,
+  &quot;user_alias&quot;: &quot;Evaluation User&quot;
+}: Lan uu tien stack backend nao cho LOTUS-88?
+  - Created At: 2026-08-01 11:00:20
+    Source: message
+    Content: Lab Assistant (assistant): Da hieu: LOTUS-88, Java + Spring Boot cho backend examples.
+  - Created At: 2026-08-01 11:00:00
+    Source: message
+    Content: [user] {
+  &quot;user_id&quot;: &quot;lan-lab17&quot;,
+  &quot;first_name&quot;: &quot;Lan&quot;,
+  &quot;last_name&quot;: &quot;Tran&quot;,
+  &quot;user_alias&quot;: &quot;Lan Tran&quot;
+}: Toi la Lan. Du an cua toi la LOTUS-88. Toi uu tien Java va Spring Boot, va khong dung Python trong vi du backend.
+&lt;/EPISODES&gt;
+
+&lt;FACTS&gt;
+The timestamp shown for each fact is the reference time of the source message that introduced it — i.e. when the fact was first mentioned. `date unknown` means no reference time is recorded for the source message.
+  - Lan Tran prefers Sprin</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#059669">long_term</span> <b>G03</b> — Cuoi tuan minh ngoi mot minh lam demo rieng, khong hop team. Truoc khi chon template, nhac lai: khi lam viec ca nhan minh uu tien ngon ngu nao, va ma du an demo ca nhan la gi? Chi preference cua Minh, dung tron so thich dong nghiep.</summary><div class="evidence"><b>Retrieved evidence</b><pre>&lt;USER_SUMMARY&gt;
+For the company project BLUEBIRD-42, the user requires the backend to use TypeScript with NestJS. For their personal project ORCHID-27, Python is still preferred for personal demos. The user needs to complete a benchmark report by Friday at 16:00, identified as LAB-REPORT-1600. The user has been debugging async HTTP, investigating connection pool, client lifecycle, and concurrency issues related to the ASYNC-FIX-20 incident. A solution found involves reusing aiohttp ClientSession and setting concurrency to 20, which effectively addresses connection churn.
+
+The user prefers Python and dislikes Java. The user is studying async/await and often confuses coroutine with Task. For personal demos, Python is preferred for the ORCHID-27 project. For the company project BLUEBIRD-42, the user mandates the use of TypeScript with NestJS for the backend.
+
+When explaining code, use short examples. When discussing async/await, coroutines, and Tasks, explain using a timeline. The user wants the AI to prioritize using a timeline when explaining coroutines and Tasks.
+&lt;/USER_SUMMARY&gt;
+
+&lt;EPISODES&gt;
+Episodes are source message or document excerpts shown in selection order.
+  - Created At: 20</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#059669">long_term</span> <b>G04</b> — Mai hop mentor, toi nay minh muon don open-loop. Liet ke viec chua dong, deadline, va ma dinh danh task. Can du ba manh de ghi vao note hop.</summary><div class="evidence"><b>Retrieved evidence</b><pre>&lt;USER_SUMMARY&gt;
+For the company project BLUEBIRD-42, the user requires the backend to use TypeScript with NestJS. For their personal project ORCHID-27, Python is still preferred for personal demos. The user needs to complete a benchmark report by Friday at 16:00, identified as LAB-REPORT-1600. The user has been debugging async HTTP, investigating connection pool, client lifecycle, and concurrency issues related to the ASYNC-FIX-20 incident. A solution found involves reusing aiohttp ClientSession and setting concurrency to 20, which effectively addresses connection churn.
+
+The user prefers Python and dislikes Java. The user is studying async/await and often confuses coroutine with Task. For personal demos, Python is preferred for the ORCHID-27 project. For the company project BLUEBIRD-42, the user mandates the use of TypeScript with NestJS for the backend.
+
+When explaining code, use short examples. When discussing async/await, coroutines, and Tasks, explain using a timeline. The user wants the AI to prioritize using a timeline when explaining coroutines and Tasks.
+&lt;/USER_SUMMARY&gt;
+
+&lt;EPISODES&gt;
+Episodes are source message or document excerpts shown in selection order.
+  - Created At: 20</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#d97706">episodic</span> <b>G07</b> — Lan debug async HTTP tren staging minh co thu tang timeout len rat lau. Cach do co work khong? Fix nao that su work, sua o dau, concurrency ra sao, ma su co la gi? Ke ca thu that bai lan fix cuoi.</summary><div class="evidence"><b>Retrieved evidence</b><pre>EPISODE: Ten du an ca nhan cua toi la ORCHID-27. Toi thich Python va khong thich Java. Khi giai thich code, hay dung vi du ngan.
+EPISODE: TODO: hoan thanh benchmark report truoc thu Sau luc 16:00. Day la open loop LAB-REPORT-1600.
+EPISODE: Hom nay toi debug async HTTP. Toi da thu tang timeout len 60s nhung van fail.
+EPISODE: Cach hieu qua la reuse aiohttp ClientSession va dat concurrency=20. Reflection: loi chinh la connection churn, khong phai timeout threshold. Ma su co ASYNC-FIX-20.
+EPISODE: Da ghi nhan trajectory: increase timeout khong hieu qua; ClientSession + concurrency=20 giai quyet connection churn.
+EPISODE: Minh sap viet script ca nhan de tai hien su co latency, muon code dung ngon ngu minh thich khi lam mot minh, dong thoi bam sat playbook incident cua lab chu dung vo tang timeout. Ghep hai manh: stack ca nhan cua Minh, va buoc bat buoc trong playbook truoc khi noi timeout. Dung lay stack cua ai khac.
+EPISODE: Minh con mot open-loop phai nop truoc deadline, dong thoi muon ghi chu retry payment dung so lan toi da theo policy. Nac lai ma task/deadline con dang do, va gioi han retry chinh thuc trong lab.
+EPISODE: Chuan bi demo ca nhan: ten/ma project rieng cua Minh la gi, </pre></div></details><details class="case ok"><summary><span class="pill" style="background:#d97706">episodic</span> <b>G08</b> — Viet post-mortem async, minh muon root cause dung ban chat. Loi goc la timeout threshold hay van de khac? Trich reflection luc do va ma su co de dan vao bao cao.</summary><div class="evidence"><b>Retrieved evidence</b><pre>EPISODE: Ten du an ca nhan cua toi la ORCHID-27. Toi thich Python va khong thich Java. Khi giai thich code, hay dung vi du ngan.
+EPISODE: Toi dang hoc async/await va hay nham coroutine voi Task. Neu sau nay gap chu de nay, hay giai thich bang timeline.
+EPISODE: TODO: hoan thanh benchmark report truoc thu Sau luc 16:00. Day la open loop LAB-REPORT-1600.
+EPISODE: Hom nay toi debug async HTTP. Toi da thu tang timeout len 60s nhung van fail.
+EPISODE: Cach hieu qua la reuse aiohttp ClientSession va dat concurrency=20. Reflection: loi chinh la connection churn, khong phai timeout threshold. Ma su co ASYNC-FIX-20.
+EPISODE: Hay chon huong dan code retry payment phu hop voi preference ca nhan cua Minh.
+EPISODE: Minh sap viet script ca nhan de tai hien su co latency, muon code dung ngon ngu minh thich khi lam mot minh, dong thoi bam sat playbook incident cua lab chu dung vo tang timeout. Ghep hai manh: stack ca nhan cua Minh, va buoc bat buoc trong playbook truoc khi noi timeout. Dung lay stack cua ai khac.
+EPISODE: Minh con mot open-loop phai nop truoc deadline, dong thoi muon ghi chu retry payment dung so lan toi da theo policy. Nac lai ma task/deadline con dang do, va gioi han retry chinh</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#0891b2">mixed</span> <b>G11</b> — Minh sap viet script ca nhan de tai hien su co latency, muon code dung ngon ngu minh thich khi lam mot minh, dong thoi bam sat playbook incident cua lab chu dung vo tang timeout. Ghep hai manh: stack ca nhan cua Minh, va buoc bat buoc trong playbook truoc khi noi timeout. Dung lay stack cua ai khac.</summary><div class="budget"><b>Budget</b><ul><li><span class="pill" style="background:#2563eb">short_term</span> used <b>0</b> / limit 800 (raw 0)</li><li><span class="pill" style="background:#059669">long_term</span> used <b>324</b> / limit 320 (raw 1494)</li><li><span class="pill" style="background:#d97706">episodic</span> used <b>0</b> / limit 240 (raw 0)</li><li><span class="pill" style="background:#7c3aed">semantic</span> used <b>103</b> / limit 240 (raw 103)</li></ul></div><div class="evidence"><b>Retrieved evidence</b><pre>&lt;LONG_TERM&gt;
+&lt;USER_SUMMARY&gt;
+For the company project BLUEBIRD-42, the user requires the backend to use TypeScript with NestJS. For their personal project ORCHID-27, Python is still preferred for personal demos. The user needs to complete a benchmark report by Friday at 16:00, identified as LAB-REPORT-1600. The user has been debugging async HTTP, investigating connection pool, client lifecycle, and concurrency issues related to the ASYNC-FIX-20 incident. A solution found involves reusing aiohttp ClientSession and setting concurrency to 20, which effectively addresses connection churn.
+
+The user prefers Python and dislikes Java. The user is studying async/await and often confuses coroutine with Task. For personal demos, Python is preferred for the ORCHID-27 project. For the company project BLUEBIRD-42, the user mandates the use of TypeScript with NestJS for the backend.
+
+When explaining code, use short examples. When discussing async/await, coroutines, and Tasks, explain using a timeline. The user wants the AI to prioritize using a timeline when explaining coroutines and Tasks.
+&lt;/USER_SUMMARY&gt;
+
+&lt;EPISODES&gt;
+Episodes are source message or document excerpts shown in selection order.
+  - Cr</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#0891b2">mixed</span> <b>G13</b> — Minh muon viet retry POST payment nhung so lap lai dung cai loi async HTTP da tung dinh. Ghep: fix async nao that su work o lan truoc, va policy payment yeu cau danh dau request the nao de khong tao don trung.</summary><div class="budget"><b>Budget</b><ul><li><span class="pill" style="background:#2563eb">short_term</span> used <b>0</b> / limit 800 (raw 0)</li><li><span class="pill" style="background:#059669">long_term</span> used <b>0</b> / limit 320 (raw 0)</li><li><span class="pill" style="background:#d97706">episodic</span> used <b>244</b> / limit 240 (raw 667)</li><li><span class="pill" style="background:#7c3aed">semantic</span> used <b>150</b> / limit 240 (raw 150)</li></ul></div><div class="evidence"><b>Retrieved evidence</b><pre>&lt;EPISODIC&gt;
+EPISODE: Toi dang hoc async/await va hay nham coroutine voi Task. Neu sau nay gap chu de nay, hay giai thich bang timeline.
+EPISODE: Hom nay toi debug async HTTP. Toi da thu tang timeout len 60s nhung van fail.
+EPISODE: Cach hieu qua la reuse aiohttp ClientSession va dat concurrency=20. Reflection: loi chinh la connection churn, khong phai timeout threshold. Ma su co ASYNC-FIX-20.
+EPISODE: Da ghi nhan trajectory: increase timeout khong hieu qua; ClientSession + concurrency=20 giai quyet connection churn.
+EPISODE: Hay chon huong dan code retry payment phu hop voi preference ca nhan cua Minh.
+EPISODE: Minh con mot open-loop phai nop truoc deadline, dong thoi muon ghi chu retry payment dung so lan toi da theo policy. Nac lai ma task/deadline con dang do, va gioi han retry chinh thuc trong lab.
+EPISODE: Chuan bi demo ca nhan: ten/ma project rieng cua Minh la gi, va lan async HTTP truoc minh reuse client nhu the nao (kem ma su co)? Khong can policy do
+[...trimmed...]
+&lt;/EPISODIC&gt;
+
+&lt;SEMANTIC&gt;
+EPISODE: For POST /payments, every retryable request MUST send the same Idempotency-Key. Retry only HTTP 429 or transient 5xx errors, use exponential-backoff, and stop after max-3-retries.</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#0891b2">mixed</span> <b>G15</b> — Toi nay minh viet tool ca nhan de tai hien su co HTTP roi sua dung playbook. Can ba manh: ngon ngu minh thich khi lam mot minh, ma su co async lan truoc, va buoc playbook truoc khi tang timeout. Scope Minh, dung tron Lan.</summary><div class="budget"><b>Budget</b><ul><li><span class="pill" style="background:#2563eb">short_term</span> used <b>0</b> / limit 800 (raw 0)</li><li><span class="pill" style="background:#059669">long_term</span> used <b>324</b> / limit 320 (raw 1488)</li><li><span class="pill" style="background:#d97706">episodic</span> used <b>244</b> / limit 240 (raw 669)</li><li><span class="pill" style="background:#7c3aed">semantic</span> used <b>150</b> / limit 240 (raw 150)</li></ul></div><div class="evidence"><b>Retrieved evidence</b><pre>&lt;LONG_TERM&gt;
+&lt;USER_SUMMARY&gt;
+For the company project BLUEBIRD-42, the user requires the backend to use TypeScript with NestJS. For their personal project ORCHID-27, Python is still preferred for personal demos. The user needs to complete a benchmark report by Friday at 16:00, identified as LAB-REPORT-1600. The user has been debugging async HTTP, investigating connection pool, client lifecycle, and concurrency issues related to the ASYNC-FIX-20 incident. A solution found involves reusing aiohttp ClientSession and setting concurrency to 20, which effectively addresses connection churn.
+
+The user prefers Python and dislikes Java. The user is studying async/await and often confuses coroutine with Task. For personal demos, Python is preferred for the ORCHID-27 project. For the company project BLUEBIRD-42, the user mandates the use of TypeScript with NestJS for the backend.
+
+When explaining code, use short examples. When discussing async/await, coroutines, and Tasks, explain using a timeline. The user wants the AI to prioritize using a timeline when explaining coroutines and Tasks.
+&lt;/USER_SUMMARY&gt;
+
+&lt;EPISODES&gt;
+Episodes are source message or document excerpts shown in selection order.
+  - Cr</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#0891b2">mixed</span> <b>G16</b> — Minh con mot open-loop phai nop truoc deadline, dong thoi muon ghi chu retry payment dung so lan toi da theo policy. Nac lai ma task/deadline con dang do, va gioi han retry chinh thuc trong lab.</summary><div class="budget"><b>Budget</b><ul><li><span class="pill" style="background:#2563eb">short_term</span> used <b>0</b> / limit 800 (raw 0)</li><li><span class="pill" style="background:#059669">long_term</span> used <b>324</b> / limit 320 (raw 1495)</li><li><span class="pill" style="background:#d97706">episodic</span> used <b>0</b> / limit 240 (raw 0)</li><li><span class="pill" style="background:#7c3aed">semantic</span> used <b>148</b> / limit 240 (raw 148)</li></ul></div><div class="evidence"><b>Retrieved evidence</b><pre>&lt;LONG_TERM&gt;
+&lt;USER_SUMMARY&gt;
+For the company project BLUEBIRD-42, the user requires the backend to use TypeScript with NestJS. For their personal project ORCHID-27, Python is still preferred for personal demos. The user needs to complete a benchmark report by Friday at 16:00, identified as LAB-REPORT-1600. The user has been debugging async HTTP, investigating connection pool, client lifecycle, and concurrency issues related to the ASYNC-FIX-20 incident. A solution found involves reusing aiohttp ClientSession and setting concurrency to 20, which effectively addresses connection churn.
+
+The user prefers Python and dislikes Java. The user is studying async/await and often confuses coroutine with Task. For personal demos, Python is preferred for the ORCHID-27 project. For the company project BLUEBIRD-42, the user mandates the use of TypeScript with NestJS for the backend.
+
+When explaining code, use short examples. When discussing async/await, coroutines, and Tasks, explain using a timeline. The user wants the AI to prioritize using a timeline when explaining coroutines and Tasks.
+&lt;/USER_SUMMARY&gt;
+
+&lt;EPISODES&gt;
+Episodes are source message or document excerpts shown in selection order.
+  - Cr</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#0891b2">mixed</span> <b>G17</b> — Minh sap giai thich coroutine cho ban, dong thoi can nhac policy retry payment vao vi du. Minh hoc kieu nao thi de nho? Va request retry payment phai mang header nao? Dung lay style hay stack cua nguoi khac.</summary><div class="budget"><b>Budget</b><ul><li><span class="pill" style="background:#2563eb">short_term</span> used <b>0</b> / limit 800 (raw 0)</li><li><span class="pill" style="background:#059669">long_term</span> used <b>324</b> / limit 320 (raw 1497)</li><li><span class="pill" style="background:#d97706">episodic</span> used <b>0</b> / limit 240 (raw 0)</li><li><span class="pill" style="background:#7c3aed">semantic</span> used <b>148</b> / limit 240 (raw 148)</li></ul></div><div class="evidence"><b>Retrieved evidence</b><pre>&lt;LONG_TERM&gt;
+&lt;USER_SUMMARY&gt;
+For the company project BLUEBIRD-42, the user requires the backend to use TypeScript with NestJS. For their personal project ORCHID-27, Python is still preferred for personal demos. The user needs to complete a benchmark report by Friday at 16:00, identified as LAB-REPORT-1600. The user has been debugging async HTTP, investigating connection pool, client lifecycle, and concurrency issues related to the ASYNC-FIX-20 incident. A solution found involves reusing aiohttp ClientSession and setting concurrency to 20, which effectively addresses connection churn.
+
+The user prefers Python and dislikes Java. The user is studying async/await and often confuses coroutine with Task. For personal demos, Python is preferred for the ORCHID-27 project. For the company project BLUEBIRD-42, the user mandates the use of TypeScript with NestJS for the backend.
+
+When explaining code, use short examples. When discussing async/await, coroutines, and Tasks, explain using a timeline. The user wants the AI to prioritize using a timeline when explaining coroutines and Tasks.
+&lt;/USER_SUMMARY&gt;
+
+&lt;EPISODES&gt;
+Episodes are source message or document excerpts shown in selection order.
+  - Cr</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#0891b2">mixed</span> <b>G18</b> — Viet slide hau kiem: root cause async lan truoc la gi, va khi cat context cho agent thi ty le budget bon tang nho trong lab la bao nhieu? Can reflection that va ma ngan sach, khong doan.</summary><div class="budget"><b>Budget</b><ul><li><span class="pill" style="background:#2563eb">short_term</span> used <b>0</b> / limit 800 (raw 0)</li><li><span class="pill" style="background:#059669">long_term</span> used <b>0</b> / limit 320 (raw 0)</li><li><span class="pill" style="background:#d97706">episodic</span> used <b>244</b> / limit 240 (raw 681)</li><li><span class="pill" style="background:#7c3aed">semantic</span> used <b>184</b> / limit 240 (raw 184)</li></ul></div><div class="evidence"><b>Retrieved evidence</b><pre>&lt;EPISODIC&gt;
+EPISODE: Ten du an ca nhan cua toi la ORCHID-27. Toi thich Python va khong thich Java. Khi giai thich code, hay dung vi du ngan.
+EPISODE: Toi se uu tien timeline khi giai thich coroutine va Task.
+EPISODE: TODO: hoan thanh benchmark report truoc thu Sau luc 16:00. Day la open loop LAB-REPORT-1600.
+EPISODE: Hay kiem tra connection pool, lifecycle cua client va concurrency.
+EPISODE: Cach hieu qua la reuse aiohttp ClientSession va dat concurrency=20. Reflection: loi chinh la connection churn, khong phai timeout threshold. Ma su co ASYNC-FIX-20.
+EPISODE: Chuan bi demo ca nhan: ten/ma project rieng cua Minh la gi, va lan async HTTP truoc minh reuse client nhu the nao (kem ma su co)? Khong can policy domain chung, chi memory cua Minh.
+EPISODE: Sep hoi chuan hoa backend du an cong ty, minh hay lan voi stack project rieng. Rieng du an cong ty cua Minh: bat buoc ngon ngu va framework nao? Python ca nhan co duoc dung backend du an do khong? Scope dung theo 
+[...trimmed...]
+&lt;/EPISODIC&gt;
+
+&lt;SEMANTIC&gt;
+EPISODE: When async HTTP calls time out, inspect connection pooling, downstream saturation and concurrency before increasing timeout. Reuse a long-lived client session where possible. Mark</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#0891b2">mixed</span> <b>G19</b> — Chuan bi demo ca nhan: ten/ma project rieng cua Minh la gi, va lan async HTTP truoc minh reuse client nhu the nao (kem ma su co)? Khong can policy domain chung, chi memory cua Minh.</summary><div class="budget"><b>Budget</b><ul><li><span class="pill" style="background:#2563eb">short_term</span> used <b>0</b> / limit 800 (raw 0)</li><li><span class="pill" style="background:#059669">long_term</span> used <b>324</b> / limit 320 (raw 1502)</li><li><span class="pill" style="background:#d97706">episodic</span> used <b>244</b> / limit 240 (raw 648)</li><li><span class="pill" style="background:#7c3aed">semantic</span> used <b>0</b> / limit 240 (raw 0)</li></ul></div><div class="evidence"><b>Retrieved evidence</b><pre>&lt;LONG_TERM&gt;
+&lt;USER_SUMMARY&gt;
+For the company project BLUEBIRD-42, the user requires the backend to use TypeScript with NestJS. For their personal project ORCHID-27, Python is still preferred for personal demos. The user needs to complete a benchmark report by Friday at 16:00, identified as LAB-REPORT-1600. The user has been debugging async HTTP, investigating connection pool, client lifecycle, and concurrency issues related to the ASYNC-FIX-20 incident. A solution found involves reusing aiohttp ClientSession and setting concurrency to 20, which effectively addresses connection churn.
+
+The user prefers Python and dislikes Java. The user is studying async/await and often confuses coroutine with Task. For personal demos, Python is preferred for the ORCHID-27 project. For the company project BLUEBIRD-42, the user mandates the use of TypeScript with NestJS for the backend.
+
+When explaining code, use short examples. When discussing async/await, coroutines, and Tasks, explain using a timeline. The user wants the AI to prioritize using a timeline when explaining coroutines and Tasks.
+&lt;/USER_SUMMARY&gt;
+
+&lt;EPISODES&gt;
+Episodes are source message or document excerpts shown in selection order.
+  - Cr</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#059669">long_term</span> <b>G05</b> — Sep hoi chuan hoa backend du an cong ty, minh hay lan voi stack project rieng. Rieng du an cong ty cua Minh: bat buoc ngon ngu va framework nao? Python ca nhan co duoc dung backend du an do khong? Scope dung theo du an cong ty.</summary><div class="evidence"><b>Retrieved evidence</b><pre>&lt;USER_SUMMARY&gt;
+For the company project BLUEBIRD-42, the user requires the backend to use TypeScript with NestJS. For their personal project ORCHID-27, Python is still preferred for personal demos. The user needs to complete a benchmark report by Friday at 16:00, identified as LAB-REPORT-1600. The user has been debugging async HTTP, investigating connection pool, client lifecycle, and concurrency issues related to the ASYNC-FIX-20 incident. A solution found involves reusing aiohttp ClientSession and setting concurrency to 20, which effectively addresses connection churn.
+
+The user prefers Python and dislikes Java. The user is studying async/await and often confuses coroutine with Task. For personal demos, Python is preferred for the ORCHID-27 project. For the company project BLUEBIRD-42, the user mandates the use of TypeScript with NestJS for the backend.
+
+When explaining code, use short examples. When discussing async/await, coroutines, and Tasks, explain using a timeline. The user wants the AI to prioritize using a timeline when explaining coroutines and Tasks.
+&lt;/USER_SUMMARY&gt;
+
+&lt;EPISODES&gt;
+Episodes are source message or document excerpts shown in selection order.
+  - Created At: 20</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#0891b2">mixed</span> <b>G12</b> — Cong ty yeu cau chinh context window cho agent tren dung backend du an cong ty. Minh can biet stack bat buoc cua BLUEBIRD va ty le budget bon tang nho trong lab de cau hinh cho dung, khong dung so thich project rieng.</summary><div class="budget"><b>Budget</b><ul><li><span class="pill" style="background:#2563eb">short_term</span> used <b>0</b> / limit 800 (raw 0)</li><li><span class="pill" style="background:#059669">long_term</span> used <b>324</b> / limit 320 (raw 1487)</li><li><span class="pill" style="background:#d97706">episodic</span> used <b>0</b> / limit 240 (raw 0)</li><li><span class="pill" style="background:#7c3aed">semantic</span> used <b>132</b> / limit 240 (raw 132)</li></ul></div><div class="evidence"><b>Retrieved evidence</b><pre>&lt;LONG_TERM&gt;
+&lt;USER_SUMMARY&gt;
+For the company project BLUEBIRD-42, the user requires the backend to use TypeScript with NestJS. For their personal project ORCHID-27, Python is still preferred for personal demos. The user needs to complete a benchmark report by Friday at 16:00, identified as LAB-REPORT-1600. The user has been debugging async HTTP, investigating connection pool, client lifecycle, and concurrency issues related to the ASYNC-FIX-20 incident. A solution found involves reusing aiohttp ClientSession and setting concurrency to 20, which effectively addresses connection churn.
+
+The user prefers Python and dislikes Java. The user is studying async/await and often confuses coroutine with Task. For personal demos, Python is preferred for the ORCHID-27 project. For the company project BLUEBIRD-42, the user mandates the use of TypeScript with NestJS for the backend.
+
+When explaining code, use short examples. When discussing async/await, coroutines, and Tasks, explain using a timeline. The user wants the AI to prioritize using a timeline when explaining coroutines and Tasks.
+&lt;/USER_SUMMARY&gt;
+
+&lt;EPISODES&gt;
+Episodes are source message or document excerpts shown in selection order.
+  - Cr</pre></div></details><details class="case ok"><summary><span class="pill" style="background:#0891b2">mixed</span> <b>G20</b> — Trong thread nay minh vua nhac constraint gio standup. Lat nua minh se them retry payment vao dung backend du an cong ty. Ghep ba manh: constraint standup con hieu luc trong thread, stack bat buoc cua backend cong ty, va cach danh dau request payment de khong trung don.</summary><div class="budget"><b>Budget</b><ul><li><span class="pill" style="background:#2563eb">short_term</span> used <b>169</b> / limit 800 (raw 169)</li><li><span class="pill" style="background:#059669">long_term</span> used <b>324</b> / limit 320 (raw 1507)</li><li><span class="pill" style="background:#d97706">episodic</span> used <b>0</b> / limit 240 (raw 0)</li><li><span class="pill" style="background:#7c3aed">semantic</span> used <b>97</b> / limit 240 (raw 97)</li></ul></div><div class="evidence"><b>Retrieved evidence</b><pre>&lt;SHORT_TERM&gt;
+&lt;SESSION_SUMMARY&gt;
+user: Constraint HOLD-ALPHA-0900: standup is 09:00 sharp and must not be forgotten. | assistant: Noted standup constraint. | user: Filler about dashboard widgets. | assistant: Filler. | user: Filler about CSS variables. | assistant: Filler. | user: Filler about copy review. | assistant: Filler.
+&lt;/SESSION_SUMMARY&gt;
+&lt;DURABLE_NOTES&gt;
+- user: Constraint HOLD-ALPHA-0900: standup is 09:00 sharp and must not be forgotten.
+- assistant: Noted standup constraint.
+&lt;/DURABLE_NOTES&gt;
+&lt;RECENT_TURNS&gt;
+user: Filler about empty charts.
+assistant: Filler.
+user: Filler about telemetry.
+assistant: Filler.
+user: Filler about a11y labels.
+assistant: Filler.
+&lt;/RECENT_TURNS&gt;
+&lt;/SHORT_TERM&gt;
+
+&lt;LONG_TERM&gt;
+&lt;USER_SUMMARY&gt;
+For the company project BLUEBIRD-42, the user requires the backend to use TypeScript with NestJS. For their personal project ORCHID-27, Python is still preferred for personal demos. The user needs to complete a benchmark report by Friday at 16:00, identified as LAB-REPORT-1600. The user has been debugging async HTTP, investigating connection pool, client lifecycle, and concurrency issues related to the ASYNC-FIX-20 incident. A solution found involves reusing aiohttp </pre></div></details>
+  <h2>Run log</h2><details class="log"><summary>Show captured run log (113 lines)</summary><pre>G01 short_term: Minh vua scroll len tren cai thread nay va bi ngap trong toan bo
+may cau linh tinh ve spacing, naming, log, test, docs, lint. Minh khong can tom 
+tat cai dam filler do. Minh chi can biet: sau khi hoi thoai da dai ra, 
+constraint nao van con hieu luc va khong duoc phep roi? Neu co ma constraint, 
+gio giac, hay noi ghi du lieu thi niem het ra, dung bo sot.
+  PASS  0.3 ms
+G02 short_term: Ngoi code muon qua nen minh hay quen dung nhung gi minh vua noi 
+trong thread nay. Dung keo thong tin tu session khac. Trong cuoc noi chuyen hien
+tai, demo ca nhan minh dat ten hay ma gi, va khi giai thich code minh muon ban 
+trinh bay kieu nao?
+  PASS  0.1 ms
+G06 long_term: Minh la Lan, sap giai trinh doi tac ve lua chon backend. Nhac 
+lai: san pham cua minh dung ngon ngu va framework nao? Chi thong tin cua Lan, 
+dung gan du an nguoi khac vao.
+  PASS  1546.8 ms
+G09 semantic: Viet module POST /payments, gap 429 hoac 5xx thi retry the nao de 
+khong tru tien hai lan? Can cach danh dau request, kieu cho, gioi han so lan, va
+ma rule thanh toan.
+  PASS  254.7 ms
+G10 semantic: So agent bi tran token. Lab co ty le phan bo context cho bon tang 
+nho. Nac lai ty le do va ma dinh danh ngan sach neu co.
+  PASS  248.9 ms
+G14 mixed: Minh la Lan, phap ly hoi gat truoc khi bat memory tren san pham. Viet
+hop dong ngan: backend minh dang dung ngon ngu/framework nao, va quy tac luu/xoa
+bo nho ca nhan trong lab yeu cau opt-in va verify ra sao? Chi stack cua Lan.
+  PASS  1784.9 ms
+G03 long_term: Cuoi tuan minh ngoi mot minh lam demo rieng, khong hop team. 
+Truoc khi chon template, nhac lai: khi lam viec ca nhan minh uu tien ngon ngu 
+nao, va ma du an demo ca nhan la gi? Chi preference cua Minh, dung tron so thich
+dong nghiep.
+  PASS  1521.3 ms
+G04 long_term: Mai hop mentor, toi nay minh muon don open-loop. Liet ke viec 
+chua dong, deadline, va ma dinh danh task. Can du ba manh de ghi vao note hop.
+  PASS  1626.3 ms
+G07 episodic: Lan debug async HTTP tren staging minh co thu tang timeout len rat
+lau. Cach do co work khong? Fix nao that su work, sua o dau, concurrency ra sao,
+ma su co la gi? Ke ca thu that bai lan fix cuoi.
+  PASS  286.9 ms
+G08 episodic: Viet post-mortem async, minh muon root cause dung ban chat. Loi 
+goc la timeout threshold hay van de khac? Trich reflection luc do va ma su co de
+dan vao bao cao.
+  PASS  320.3 ms
+G11 mixed: Minh sap viet script ca nhan de tai hien su co latency, muon code 
+dung ngon ngu minh thich khi lam mot minh, dong thoi bam sat playbook incident 
+cua lab chu dung vo tang timeout. Ghep hai manh: stack ca nhan cua Minh, va buoc
+bat buoc trong playbook truoc khi noi timeout. Dung lay stack cua ai khac.
+  PASS  1822.4 ms
+G13 mixed: Minh muon viet retry POST payment nhung so lap lai dung cai loi async
+HTTP da tung dinh. Ghep: fix async nao that su work o lan truoc, va policy 
+payment yeu cau danh dau request the nao de khong tao don trung.
+  PASS  542.3 ms
+G15 mixed: Toi nay minh viet tool ca nhan de tai hien su co HTTP roi sua dung 
+playbook. Can ba manh: ngon ngu minh thich khi lam mot minh, ma su co async lan 
+truoc, va buoc playbook truoc khi tang timeout. Scope Minh, dung tron Lan.
+  PASS  2057.4 ms
+G16 mixed: Minh con mot open-loop phai nop truoc deadline, dong thoi muon ghi 
+chu retry payment dung so lan toi da theo policy. Nac lai ma task/deadline con 
+dang do, va gioi han retry chinh thuc trong lab.
+  PASS  2239.5 ms
+G17 mixed: Minh sap giai thich coroutine cho ban, dong thoi can nhac policy 
+retry payment vao vi du. Minh hoc kieu nao thi de nho? Va request retry payment 
+phai mang header nao? Dung lay style hay stack cua nguoi khac.
+  PASS  1839.6 ms
+G18 mixed: Viet slide hau kiem: root cause async lan truoc la gi, va khi cat 
+context cho agent thi ty le budget bon tang nho trong lab la bao nhieu? Can 
+reflection that va ma ngan sach, khong doan.
+  PASS  604.0 ms
+G19 mixed: Chuan bi demo ca nhan: ten/ma project rieng cua Minh la gi, va lan 
+async HTTP truoc minh reuse client nhu the nao (kem ma su co)? Khong can policy 
+domain chung, chi memory cua Minh.
+  PASS  1916.3 ms
+G05 long_term: Sep hoi chuan hoa backend du an cong ty, minh hay lan voi stack 
+project rieng. Rieng du an cong ty cua Minh: bat buoc ngon ngu va framework nao?
+Python ca nhan co duoc dung backend du an do khong? Scope dung theo du an cong 
+ty.
+  PASS  2234.9 ms
+G12 mixed: Cong ty yeu cau chinh context window cho agent tren dung backend du 
+an cong ty. Minh can biet stack bat buoc cua BLUEBIRD va ty le budget bon tang 
+nho trong lab de cau hinh cho dung, khong dung so thich project rieng.
+  PASS  1718.8 ms
+G20 mixed: Trong thread nay minh vua nhac constraint gio standup. Lat nua minh 
+se them retry payment vao dung backend du an cong ty. Ghep ba manh: constraint 
+standup con hieu luc trong thread, stack bat buoc cua backend cong ty, va cach 
+danh dau request payment de khong trung don.
+  PASS  2977.7 ms
+Golden 20/20. Bonus = 10/10.
+            Benchmark summary            
+┏━━━━━━┳━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━┓
+┃ Case ┃ Layer      ┃ Pass ┃ Latency ms ┃
+┡━━━━━━╇━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━┩
+│ G01  │ short_term │ yes  │        0.3 │
+│ G02  │ short_term │ yes  │        0.1 │
+│ G06  │ long_term  │ yes  │     1546.8 │
+│ G09  │ semantic   │ yes  │      254.7 │
+│ G10  │ semantic   │ yes  │      248.9 │
+│ G14  │ mixed      │ yes  │     1784.9 │
+│ G03  │ long_term  │ yes  │     1521.3 │
+│ G04  │ long_term  │ yes  │     1626.3 │
+│ G07  │ episodic   │ yes  │      286.9 │
+│ G08  │ episodic   │ yes  │      320.3 │
+│ G11  │ mixed      │ yes  │     1822.4 │
+│ G13  │ mixed      │ yes  │      542.3 │
+│ G15  │ mixed      │ yes  │     2057.4 │
+│ G16  │ mixed      │ yes  │     2239.5 │
+│ G17  │ mixed      │ yes  │     1839.6 │
+│ G18  │ mixed      │ yes  │      604.0 │
+│ G19  │ mixed      │ yes  │     1916.3 │
+│ G05  │ long_term  │ yes  │     2234.9 │
+│ G12  │ mixed      │ yes  │     1718.8 │
+│ G20  │ mixed      │ yes  │     2977.7 │
+└──────┴────────────┴──────┴────────────┘
+Reports: /workspace/reports/golden_benchmark.json | 
+/workspace/reports/golden_benchmark.md
+</pre></details>
+</div></body></html>
